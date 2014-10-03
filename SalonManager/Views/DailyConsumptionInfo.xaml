@@ -1,0 +1,96 @@
+﻿<Page x:Class="SalonManager.Views.DailyConsumptionInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d"
+	Title="DailyConsumptionInfo" Height="600" Width="420">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" Width="420" Height="590">
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="日期" Name="Date" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Name="DateText" Style="{StaticResource InfoTxtStyle}" Width="160" FontSize="18"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="客戶" Name="CustomerName" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <ComboBox Name="CustomerNameBox" Width="150" Margin="5" SelectionChanged="CustomerNameBox_SelectionChanged" FontSize="18" >
+                    </ComboBox>
+                    <TextBox Name="SelectCustomerText" TextChanged="SelectCustomerText_TextChanged" Width="100" FontSize="18"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="設計師" Name="EmployeeName" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                    <ComboBox Name="EmployeeNameBox" Width="150" Margin="5" SelectionChanged="EmployeeNameBox_SelectionChanged" FontSize="18">
+                    </ComboBox>
+                    <CheckBox Content="指定" VerticalAlignment="Center" IsChecked="{Binding IsSpecify}" FontSize="18"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal" Height="175">
+                    <TextBlock Text="消費產品" Name="ConsumerGoods" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <ListBox Name="ConsumerGoodsListBox" MinHeight="50" Width="200" Margin="5" Height="80"  FontSize="18"/>
+                            <Button Name="ConsumerGoodsRemoveBtn" Content="移除" Foreground="White" Background="Red"  Height="35" Padding="10,0" Click="ConsumerGoodsRemoveBtn_Click" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="價格" Margin="0,5" FontSize="18"/>
+                            <TextBox Name="GoodsPrice" Width="80" FontSize="18"/>
+                            <TextBlock Text="抽成" Margin="0,5" FontSize="18"/>
+                            <TextBox Name="GoodsBonus" Width="80" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Name="ConsumerGoodsAddBox" Width="120" Margin="5" FontSize="18"/>
+                            <ComboBox Name="GoodsProviderAddBox" Width="120" Margin="5" FontSize="18"/>
+                            <Button Name="ConsumerGoodsAddBtn" Content="加入" Foreground="Black" Background="LightBlue"   Height="Auto"  Padding="10,0" Click="ConsumerGoodsAddBtn_Click" FontSize="18"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal" Height="175">
+                    <TextBlock Text="服務內容" Name="Service" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <ListBox Name="ServiceListBox" MinHeight="50" Width="200" Margin="5" Height="80"  FontSize="18"/>
+                            <Button Name="ServiceRemoveBtn" Content="移除" Foreground="White" Background="Red"  Height="35" Padding="10,0" Click="ServiceRemoveBtn_Click" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="價格" Margin="0,5" FontSize="18"/>
+                            <TextBox Name="ServicePrice" Width="80" FontSize="18"/>
+                            <TextBlock Text="抽成" Margin="0,5" FontSize="18"/>
+                            <TextBox Name="ServiceBonus" Width="80" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Name="ServiceAddBox" Width="120" Margin="5" Height="Auto" FontSize="18"/>
+                            <ComboBox Name="ServiceProviderAddBox" Width="120" Margin="5" Height="Auto" FontSize="18"/>
+                            <Button Name="ServiceAddBtn" Content="加入" Foreground="Black" Background="LightBlue"  Height="Auto" Padding="10,0" Click="ServiceAddBtn_Click" FontSize="18"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="預付扣抵" Name="Payment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                    <TextBox Text="{Binding Payment}" Name="PaymentText" TextChanged="PaymentText_TextChanged" FontSize="18"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="總金額" Name="Cost" Style="{StaticResource InfoTxtStyle}" Width="Auto" FontSize="18"/>
+                    <TextBlock Text="{Binding Cost}" Name="CostText" Foreground="Red" Width="Auto" FontSize="18" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Page>

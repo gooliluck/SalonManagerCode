@@ -1,0 +1,488 @@
+﻿<Window x:Class="SalonManager.Views.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+		xmlns:viewModels="clr-namespace:SalonManager.ViewModels"
+        xmlns:converters="clr-namespace:SalonManager.Converters"
+        Title="美髮沙龍管理系統"
+        WindowStartupLocation="CenterScreen"
+        Height="1000"
+        Width="1920">
+    <Window.Resources>
+        <viewModels:MainWindowViewModel x:Key="WindowsViewModel"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource WindowsViewModel}">
+
+        <StackPanel Orientation="Vertical" >
+            <StackPanel Orientation="Horizontal" Margin="5,0" HorizontalAlignment="Left" Width="1192">
+                <Image Source="/SalonManager;component/Image/01圖.png" RenderTransformOrigin="1,1" Width="100" Height="100" />
+                <Image Source="/SalonManager;component/Image/02英字.png" RenderTransformOrigin="1,1" Width="200" Height="100" />
+                <Image Source="/SalonManager;component/Image/03中字.png" RenderTransformOrigin="1,1" Width="500" Height="100" />
+                <StackPanel Orientation="Vertical" Margin="0,20">
+                    <DatePicker SelectedDate="{Binding ChooseDate}" Width="137" HorizontalAlignment="Left" FontSize="18"></DatePicker>
+                    <Border HorizontalAlignment="Left" Margin="0 5" BorderBrush="Black" BorderThickness="2" Width="375">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                            <TextBlock FontSize="18" VerticalAlignment="Center" FontWeight="Bold">搜尋：</TextBlock>
+                            <TextBox Name="SearchBox" Width="200" Text="{Binding FilterString , UpdateSourceTrigger=PropertyChanged}" FontSize="18"></TextBox>
+                            <Button Padding="20 0" Margin="10 0" Command="{Binding ClearFilter}" FontSize="18">清除</Button>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+            <TabControl  HorizontalAlignment="Left"  Name="TabControl" VerticalAlignment="Top" Margin="20">
+                <TabItem Header="   客戶資料    " Name="Customers" FontSize="18" FontWeight="Bold" >
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+
+                            <DataGrid ItemsSource="{Binding CustomerView}" x:Name="CustomerGrid" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Name}"
+                                		IsReadOnly="True"
+                                		Header="姓名" Foreground="Blue" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding GenderString}"
+                                		IsReadOnly="True"
+                                		Header="性別" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding Tel}"
+                                		IsReadOnly="True"
+                                		Header="電話" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Address}"
+                                		IsReadOnly="True"
+                                		Header="地址" Width="2*"/>
+                                    <DataGridTemplateColumn Width="1*" Header="預付金">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock Text="{Binding Payment}"  Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                    <Button Content=" + " Foreground="Black" Background="White" Padding="0,0" Command="{Binding AddPaymentCommand}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="消費紀錄" Width="1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Button Content="打開" Foreground="Black" Background="White" Command="{Binding ComsumeDetailCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding Comment}"
+                                		IsReadOnly="True"
+                                		Header="備註" Width="1.5*"/>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="1">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Button Content="編輯" Foreground="Black" Background="LightBlue" Padding="20,0"
+                                							Command="{Binding PopEditWindowCommand}" Height="Auto"/>
+                                                        <Button Content="刪除" Foreground="White" Background="Red" Padding="20,0"
+                                							Command="{Binding DeleteDataCommand}" Height="Auto"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Content="新增資料"
+                                HorizontalAlignment="Left"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                Command="{Binding AddCustomerDataCommand}" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   員工資料    " Name="Employees" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid ItemsSource="{Binding EmployeeView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Name}"
+                                        IsReadOnly="True"
+                                        Header="姓名" Foreground="Blue" Width="1*" />
+                                    <DataGridTextColumn Binding="{Binding GenderString}"
+                                        IsReadOnly="True"
+                                        Header="性別" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding Tel}"
+                                        IsReadOnly="True"
+                                        Header="電話" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Post}"
+                                        IsReadOnly="True"
+                                        Header="職位" Foreground="Purple" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding BasicSalary}"
+                                        IsReadOnly="True"
+                                        Header="基本底薪" Foreground="Red"  Width="1*"/>
+                                    <DataGridTemplateColumn Header="業績統計" Width="1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Button Content="打開" Foreground="Black" Background="White" Command="{Binding SalaryDetailCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding CommissionString}"
+                                        IsReadOnly="True"
+                                        Header="抽成" Foreground="Green" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Comment}"
+                                        IsReadOnly="True"
+                                        Header="備註" Width="1.5*"/>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="1">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Button Content="編輯" Foreground="Black" Background="LightBlue" Padding="20,0"
+                                        Command="{Binding PopEditWindowCommand}"/>
+                                                        <Button Content="刪除" Foreground="White" Background="Red" Padding="20,0"
+                                        Command="{Binding DeleteDataCommand}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="新增資料"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Command="{Binding AddEmployeeDataCommand}" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   產品資訊    " Name="Goods" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid ItemsSource="{Binding GoodsView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Name}"
+                                        IsReadOnly="True"
+                                        Header="產品名稱" Foreground="Blue" Width="2*" />
+                                    <DataGridTextColumn Binding="{Binding Price}"
+                                        IsReadOnly="True"
+                                        Header="價格" Foreground="Red" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Cost}"
+                                        IsReadOnly="True"
+                                        Header="成本" Foreground="Purple" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Commission}"
+                                        IsReadOnly="True"
+                                        Header="抽成" Foreground="Green" Width="1*"/>
+                                    <DataGridTemplateColumn Width="1*" Header="庫存">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock Text="{Binding Inventory}"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                    <Button Content=" + " Foreground="Black" Background="White" Padding="0,0" Command="{Binding AddInventoryCommand}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding Comment}"
+                                        IsReadOnly="True"
+                                        Header="備註" Width="2*"/>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="1">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Button Content="編輯" Foreground="Black" Background="LightBlue" Padding="20,0"
+                                        Command="{Binding PopEditWindowCommand}"/>
+                                                        <Button Content="刪除" Foreground="White" Background="Red" Padding="20,0"
+                                        Command="{Binding DeleteDataCommand}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="新增資料"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Command="{Binding AddGoodsDataCommand}" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   服務項目    " Name="Service" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid ItemsSource="{Binding ServiceView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Name}"
+                                        IsReadOnly="True"
+                                        Header="服務名稱" Foreground="Blue" Width="2*" />
+                                    <DataGridTextColumn Binding="{Binding Price}"
+                                        IsReadOnly="True"
+                                        Header="價格" Foreground="Red" Width="2*"/>
+                                    <DataGridTextColumn Binding="{Binding Commission}"
+                                        IsReadOnly="True"
+                                        Header="抽成金額" Foreground="Green" Width="2*"/>
+                                    <DataGridTextColumn Binding="{Binding Comment}"
+                                        IsReadOnly="True"
+                                        Header="備註" Width="2*"/>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="1">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Button Content="編輯" Foreground="Black" Background="LightBlue" Padding="20,0"
+                                        Command="{Binding PopEditWindowCommand}"/>
+                                                        <Button Content="刪除" Foreground="White" Background="Red" Padding="20,0"
+                                        Command="{Binding DeleteDataCommand}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="新增資料"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Command="{Binding AddServiceDataCommand}" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   當日消費    " Name="DailyConsumptions" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid ItemsSource="{Binding DailyConsumptionView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding CustomerName}"
+                                        IsReadOnly="True"
+                                        Header="客戶名稱" Foreground="Blue" Width="1*" />
+                                    <DataGridTextColumn Binding="{Binding EmployeeName}"
+                                        IsReadOnly="True"
+                                        Header="服務員工" Foreground="Brown" Width="1*"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding IsSpecify}"
+                                        IsReadOnly="True"
+                                        Header="指定" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding ConsumerGoods}"
+                                        IsReadOnly="True"
+                                        Header="消費物品" Width="1.5*"/>
+                                    <DataGridTextColumn Binding="{Binding Service}"
+                                        IsReadOnly="True"
+                                        Header="服務內容" Width="1.5*"/>
+                                    <DataGridTextColumn Binding="{Binding Discount}"
+                                        IsReadOnly="True"
+                                        Header="折扣" Foreground="Green" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding Payment}"
+                                        IsReadOnly="True"
+                                        Header="預付金扣抵" Foreground="Red" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Cost}"
+                                        IsReadOnly="True"
+                                        Header="總金額" Foreground="Red" Width="1*"/>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="1">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Button Content="刪除" Foreground="White" Background="Red" Padding="20,0"
+                                        Command="{Binding DeleteDataCommand}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="新增資料"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Command="{Binding AddDailyConsumptionDataCommand}" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   雜項支出    " Name="OtherCost" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid Name ="OtherCostGrid" ItemsSource="{Binding OtherCostView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding CostName}"
+                                        IsReadOnly="True"
+                                        Header="項目" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding Cost}"
+                                        IsReadOnly="True"
+                                        Header="金額" Foreground="Red" Width="*"/>
+                                    <DataGridTextColumn Binding="{Binding Comment}"
+                                        IsReadOnly="True"
+                                        Header="備註" Width="2*"/>
+                                    <DataGridTemplateColumn Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="1">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Button Content="編輯" Foreground="Black" Background="LightBlue" Padding="20,0"
+                                        Command="{Binding PopEditWindowCommand}"/>
+                                                        <Button Content="刪除" Foreground="White" Background="Red" Padding="20,0"
+                                        Command="{Binding DeleteDataCommand}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="總計" Padding="2,2"/>
+                                <TextBlock Text="{Binding TotalOtherCost}" Padding="2,2" Foreground="Red"/>
+                            </StackPanel>
+                            <Button Content="新增資料"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Command="{Binding AddOtherCostCommand}" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   當月累計    " Name="MonthlyConsumptions" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid Name ="MonthlyConsumptionsGrid" ItemsSource="{Binding MonthlyConsumptionView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding DateString}"
+                                        IsReadOnly="True"
+                                        Header="日期" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding CustomerName}"
+                                        IsReadOnly="True"
+                                        Header="客戶名稱" Foreground="Blue" Width="1.5*" />
+                                    <DataGridTextColumn Binding="{Binding EmployeeName}"
+                                        IsReadOnly="True"
+                                        Header="服務員工" Foreground="Brown" Width="1.5*"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding IsSpecify}"
+                                        IsReadOnly="True"
+                                        Header="指定" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding ConsumerGoods}"
+                                        IsReadOnly="True"
+                                        Header="消費物品" Width="2*"/>
+                                    <DataGridTextColumn Binding="{Binding Service}"
+                                        IsReadOnly="True"
+                                        Header="服務內容" Width="2*"/>
+                                    <DataGridTextColumn Binding="{Binding Cost}"
+                                        IsReadOnly="True"
+                                        Header="總金額" Foreground="Red" Width="1.5*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Name="PrintMonthButton"
+                                Content="列印"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Click="PrintMonthButton_Click" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   今年累計    " Name="YearlyConsumptions" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                            <DataGrid Name ="YearlyConsumptionsGrid" ItemsSource="{Binding YearlyConsumptionView}" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding DateString}"
+                                        IsReadOnly="True"
+                                        Header="日期" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding CustomerName}"
+                                        IsReadOnly="True"
+                                        Header="客戶名稱" Foreground="Blue" Width="1.5*" />
+                                    <DataGridTextColumn Binding="{Binding EmployeeName}"
+                                        IsReadOnly="True"
+                                        Header="服務員工" Foreground="Brown" Width="1.5*"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding IsSpecify}"
+                                        IsReadOnly="True"
+                                        Header="指定" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding ConsumerGoods}"
+                                        IsReadOnly="True"
+                                        Header="消費物品" Width="2*"/>
+                                    <DataGridTextColumn Binding="{Binding Service}"
+                                        IsReadOnly="True"
+                                        Header="服務內容" Width="2*"/>
+                                    <DataGridTextColumn Binding="{Binding Cost}"
+                                        IsReadOnly="True"
+                                        Header="總金額" Foreground="Red" Width="1.5*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Name="PrintYearButton"
+                                Content="列印"
+                                Margin="0 10 0 0"
+                                Padding="30,5"
+                                Background="Lime"
+                                HorizontalAlignment="Left"
+                                Click="PrintYearButton_Click" Height="Auto" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="   系統設定    " Name="DataBaseSetting" FontSize="18" FontWeight="Bold">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Button Name="BackUpDB" Click="BackUpDB_Click" Content="匯出資料庫" Margin="10" Height="Auto"></Button>
+                            <Button Name="ImportDB" Click="ImportDB_Click"  Content="匯入資料庫" Margin="10" Height="Auto"></Button>
+                            <Button Name="ChangePW" Click="ChangePW_Click"  Content="變更密碼" Margin="10" Height="Auto"></Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10">
+            <TextBlock FontSize="15">
+                <Run Text="Made By KimWorks" />
+            </TextBlock>
+            <TextBlock FontSize="15">
+                <Run Text="E-Mail : ckkimchen@gmail.com" />
+            </TextBlock>
+
+            <!--<TextBlock FontSize="15">
+                <Run Text="(Made By " />
+                <Hyperlink NavigateUri="mailto://ckkimchen@gmail.com" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="KimWorks" />
+                </Hyperlink>
+                <Run Text=")" />
+            </TextBlock>
+            <Button Name="BackUpDB" Click="BackUpDB_Click" Content="備份資料庫"></Button>-->
+        </StackPanel>
+    </Grid>
+</Window>

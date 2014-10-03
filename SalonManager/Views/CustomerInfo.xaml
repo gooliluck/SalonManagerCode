@@ -1,0 +1,66 @@
+﻿<Page x:Class="SalonManager.Views.CustomerInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="450"
+	Title="CustomerInfo">
+    
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="地址" Name="Address" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBox Text="{Binding Address}" Name="AddressText"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource InfoBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="預付金" Name="Payment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                    <TextBox Text="{Binding Payment}" Name="PaymentText"/>
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="頭皮狀況" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                <ComboBox Name="scalpType1Box" Width="80" Margin="5" SelectedIndex="{Binding ScalpType1}" FontSize="18">
+                    <ComboBoxItem Content="乾" />
+                    <ComboBoxItem Content="中" />
+                    <ComboBoxItem Content="油" />
+                </ComboBox>
+                <ComboBox Name="scalpType2Box" Width="80" Margin="5" SelectedIndex="{Binding ScalpType2}" FontSize="18">
+                    <ComboBoxItem Content="正常" />
+                    <ComboBoxItem Content="敏感" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="原生髮質" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                <ComboBox Name="oriHairType1Box" Width="80" Margin="5" SelectedIndex="{Binding OriHairType1}"  FontSize="18">
+                    <ComboBoxItem Content="粗" />
+                    <ComboBoxItem Content="細" />
+                </ComboBox>
+                <ComboBox Name="oriHairType2Box" Width="80" Margin="5" SelectedIndex="{Binding OriHairType2}"  FontSize="18">
+                    <ComboBoxItem Content="軟" />
+                    <ComboBoxItem Content="硬" />
+                </ComboBox>
+                <ComboBox Name="oriHairType3Box" Width="80" Margin="5" SelectedIndex="{Binding OriHairType3}"  FontSize="18">
+                    <ComboBoxItem Content="乾" />
+                    <ComboBoxItem Content="中" />
+                    <ComboBoxItem Content="油" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="後天髮質" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                <ComboBox Name="lateHairTypeBox" Width="160" Margin="5" SelectedIndex="{Binding LateHairType}" FontSize="18">
+                    <ComboBoxItem Content="健康" />
+                    <ComboBoxItem Content="輕度受損" />
+                    <ComboBoxItem Content="中度受損" />
+                    <ComboBoxItem Content="重度受損" />
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Page>
