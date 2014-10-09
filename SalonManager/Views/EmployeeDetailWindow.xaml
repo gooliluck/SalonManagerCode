@@ -44,7 +44,7 @@
             </TabItem>
                 <TabItem Header="   服務項目統計    " Name="ServiceResults" FontSize="18">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <DataGrid Name="ServicesGrid" Width="760" Height="400" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False">
+                        <DataGrid Name="ServicesGrid" Width="850" Height="400" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding ServiceName}"
                                         IsReadOnly="True"

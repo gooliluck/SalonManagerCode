@@ -19,6 +19,7 @@ namespace SalonManager.Views
     public partial class PasswordWindow : Window
     {
         private static String defaultPassword = "kimchen";
+        private static Boolean closebypwd = false;
         public PasswordWindow()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace SalonManager.Views
             String nowPw = SalonManager.Properties.Settings.Default.Password;
             if (pw.Equals(defaultPassword) || pw.Equals(nowPw))
             {
+                closebypwd = true;
                 this.Close();
             }
             else {
@@ -40,6 +42,12 @@ namespace SalonManager.Views
         private void Cancel(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(closebypwd == false)
+                System.Windows.Application.Current.Shutdown();
         }
     }
 }

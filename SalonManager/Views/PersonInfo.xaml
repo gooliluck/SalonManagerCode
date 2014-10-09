@@ -12,19 +12,19 @@
                     VerticalAlignment="Top">
         <Border Style="{StaticResource InfoBorderStyle}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="姓名" Name="Name" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                <TextBlock Text="姓名" Name="Name" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                 <TextBox Text="{Binding Name}" Name="NameText" FontSize="18"/>
             </StackPanel>
         </Border>
         <Border Style="{StaticResource InfoBorderStyle}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="電話" Name="Tel" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                <TextBlock Text="電話" Name="Tel" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                 <TextBox Text="{Binding Tel}" Name="TelText" FontSize="18"/>
             </StackPanel>
         </Border>
         <Border Style="{StaticResource InfoBorderStyle}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="性別" Name="Gender" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                <TextBlock Text="性別" Name="Gender" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                 <ComboBox Name="GenderBox" Width="150" Margin="5" SelectedIndex="{Binding GenderInt}" FontSize="18">
                     <ComboBoxItem Content="未知" />
                     <ComboBoxItem Content="男" />
@@ -35,7 +35,7 @@
         <Frame Name="CustomFrame"/>
         <Border Style="{StaticResource InfoBorderStyle}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="備註" Name="Comment" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                <TextBlock Text="備註" Name="Comment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                 <TextBox Text="{Binding Comment}" Name="CommentText" Height="200" AcceptsReturn="True" FontSize="18"/>
             </StackPanel>
         </Border>

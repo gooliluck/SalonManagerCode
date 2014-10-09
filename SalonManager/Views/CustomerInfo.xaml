@@ -13,13 +13,13 @@
                 VerticalAlignment="Top">
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="地址" Name="Address" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="地址" Name="Address" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Address}" Name="AddressText"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="預付金" Name="Payment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
+                    <TextBlock Text="預付金" Name="Payment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Payment}" Name="PaymentText"/>
                 </StackPanel>
             </Border>

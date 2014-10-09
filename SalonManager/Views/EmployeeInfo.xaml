@@ -13,19 +13,19 @@
                 VerticalAlignment="Top">
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="職位" Name="Post" Style="{StaticResource InfoTxtStyle}" Width="90" FontSize="18"/>
+                    <TextBlock Text="職位" Name="Post" Style="{StaticResource InfoTxtStyle}" Width="70" FontSize="18"/>
                     <TextBox Text="{Binding Post}" Name="PostText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="基本底薪" Name="BasicSalary" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="90"/>
+                    <TextBlock Text="基本底薪" Name="BasicSalary" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding BasicSalary}" Name="BasicSalaryText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="抽成" Name="Commission" Style="{StaticResource InfoTxtStyle}" Width="90" FontSize="18"/>
+                    <TextBlock Text="抽成" Name="Commission" Style="{StaticResource InfoTxtStyle}" Width="70" FontSize="18"/>
                     <TextBox Text="{Binding Commission}" Name="CommissionText" FontSize="18"/>
                 </StackPanel>
             </Border>

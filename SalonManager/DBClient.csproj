@@ -30,7 +30,7 @@
     <ProductName>SalonManager</ProductName>
     <PublisherName>KimWorks</PublisherName>
     <SuiteName>KimWorks</SuiteName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

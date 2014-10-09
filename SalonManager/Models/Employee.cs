@@ -42,6 +42,20 @@ namespace SalonManager.Models
         {
             get { return basicSalary + monthlyBonus; }
         }
+
+        private int startSalary = 0;
+        public int StartSalary
+        {
+            get { return startSalary; }
+            set { startSalary = value; }
+        }
+
+        private int payedSalary = 0;
+        public int PayedSalary
+        {
+            get { return payedSalary; }
+            set { payedSalary = value; }
+        }
         #endregion
 
         #region Commission

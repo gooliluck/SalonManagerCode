@@ -104,6 +104,7 @@ namespace SalonManager.Views
                         }
                         if (providerId.Equals(employeeId))
                         {
+                            
                             bonus += servicBonus;
                             if(serviceResultDic.ContainsKey(serviceId)){
                                 serviceResultDic[serviceId].MonthlyNumber += 1;

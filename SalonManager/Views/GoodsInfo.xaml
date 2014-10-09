@@ -13,37 +13,37 @@
                 VerticalAlignment="Top">
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="產品名稱" Name="Name" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="產品名稱" Name="Name" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="Auto"/>
                     <TextBox Text="{Binding Name}" Name="NameText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="價格" Name="Price" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="價格" Name="Price" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Price}" Name="PriceText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="成本" Name="Cost" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="成本" Name="Cost" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Cost}" Name="CostText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="抽成" Name="Commission" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="抽成" Name="Commission" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Commission}" Name="CommissionText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="庫存" Name="Inventory" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="庫存" Name="Inventory" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Inventory}" Name="InventoryText"  FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="備註" Name="Comment" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="備註" Name="Comment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Comment}" Name="CommentText" Height="200" AcceptsReturn="True" FontSize="18"/>
                 </StackPanel>
             </Border>

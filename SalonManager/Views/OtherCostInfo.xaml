@@ -13,19 +13,19 @@
                 VerticalAlignment="Top">
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="項目" Name="CostName" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="項目" Name="CostName" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding CostName}" Name="CostNameText" FontSize="18"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="金額" Name="Cost" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="金額" Name="Cost" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Cost}" Name="CostText" FontSize="18"/>
                 </StackPanel>
             </Border> 
             <Border Style="{StaticResource InfoBorderStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="備註" Name="Comment" Style="{StaticResource InfoTxtStyle}" FontSize="18"/>
+                    <TextBlock Text="備註" Name="Comment" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                     <TextBox Text="{Binding Comment}" Name="CommentText" Height="200" AcceptsReturn="True" FontSize="18"/>
                 </StackPanel>
             </Border>
