@@ -30,7 +30,7 @@
     <ProductName>SalonManager</ProductName>
     <PublisherName>KimWorks</PublisherName>
     <SuiteName>KimWorks</SuiteName>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -104,11 +104,13 @@
     <Compile Include="Helpers\Config.cs" />
     <Compile Include="Helpers\DBConnection.cs" />
     <Compile Include="Helpers\Printer.cs" />
+    <Compile Include="Models\Acount.cs" />
     <Compile Include="Models\BaseData.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DailyConsumption.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Goods.cs" />
+    <Compile Include="Models\MonthlyConsumption.cs" />
     <Compile Include="Models\OtherCost.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\ServiceResult.cs" />

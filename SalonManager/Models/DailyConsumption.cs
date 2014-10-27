@@ -48,6 +48,7 @@ namespace SalonManager.Models
             }
             set { employeeName = value; }
         }
+
         public bool isSpecify = false;
         public bool IsSpecify {
             get { return isSpecify; }

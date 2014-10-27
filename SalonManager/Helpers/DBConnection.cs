@@ -19,8 +19,9 @@ namespace SalonManager.Helpers
         public static string path = "sqlDB.db";
         private string password = "1234";
         private SQLiteConnection connection = null;
+        private string dbpwd = "";
 
-        private Dictionary<string, Type> tableMap = new Dictionary<string, Type>() { { "customerTable", typeof(Customer) }, { "employeeTable", typeof(Employee) }, { "goodsTable", typeof(Goods) }, { "serviceTable", typeof(Service) }, { "consumptionTable", typeof(DailyConsumption) }, { "otherCostTable", typeof(OtherCost) } };
+        private Dictionary<string, Type> tableMap = new Dictionary<string, Type>() { { "customerTable", typeof(Customer) }, { "employeeTable", typeof(Employee) }, { "goodsTable", typeof(Goods) }, { "serviceTable", typeof(Service) }, { "consumptionTable", typeof(DailyConsumption) }, { "otherCostTable", typeof(OtherCost) }, { "passwordTable", typeof(Acount) } };
 
         public static DBConnection ins()
         {
@@ -324,6 +325,27 @@ namespace SalonManager.Helpers
             }
             string updateString = "update " + tableName + " set " + tempString + " where dbid = '"+ id +"';";
             return ExecuteNoQuery(updateString);
+        }
+
+        public int changePwd(Acount obj)
+        {
+            if (connection == null)
+                return -1;
+            
+
+
+            return 0;
+        }
+
+        public Acount getPwd(string dbid)
+        {
+            Acount obj = new Acount();
+            if (connection == null)
+                return obj;
+
+
+
+            return obj;
         }
     }
 }

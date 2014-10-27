@@ -27,7 +27,7 @@ namespace SalonManager.Views
 
         private void ConfirmPassword(object sender, RoutedEventArgs e)
         {
-            String pw = this.Password.Text;
+            String pw = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(System.Runtime.InteropServices.Marshal.SecureStringToBSTR(this.Password.SecurePassword));
             String nowPw = SalonManager.Properties.Settings.Default.Password;
             if (pw.Equals(defaultPassword) || pw.Equals(nowPw))
             {

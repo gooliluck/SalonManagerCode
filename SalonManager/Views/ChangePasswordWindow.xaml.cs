@@ -26,9 +26,14 @@ namespace SalonManager.Views
 
         private void ConfirmNewPassword(object sender, RoutedEventArgs e)
         {
-            if (!this.NewPassword.Text.Equals("") && this.NewPassword.Text.Equals(this.ConfirmPassword.Text))
+  
+            string Confirmpassword = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(System.Runtime.InteropServices.Marshal.SecureStringToBSTR(this.ConfirmPassword.SecurePassword));
+
+            string Newpassword = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(System.Runtime.InteropServices.Marshal.SecureStringToBSTR(this.NewPassword.SecurePassword));
+
+            if (!Newpassword.Equals("") && Newpassword.Equals(Confirmpassword))
             {
-                SalonManager.Properties.Settings.Default.Password = this.NewPassword.Text;
+                SalonManager.Properties.Settings.Default.Password = Newpassword;
                 SalonManager.Properties.Settings.Default.Save();
                 this.Close();
             }

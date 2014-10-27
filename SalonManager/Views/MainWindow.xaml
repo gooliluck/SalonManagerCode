@@ -17,11 +17,11 @@
     <Grid DataContext="{StaticResource WindowsViewModel}">
 
         <StackPanel Orientation="Vertical" >
-            <StackPanel Orientation="Horizontal" Margin="5,0" HorizontalAlignment="Left" Width="1192">
+            <StackPanel Orientation="Horizontal" Margin="5,0" HorizontalAlignment="Left" Width="1900" >
                 <Image Source="/SalonManager;component/Image/01圖.png" RenderTransformOrigin="1,1" Width="100" Height="100" />
                 <Image Source="/SalonManager;component/Image/02英字.png" RenderTransformOrigin="1,1" Width="200" Height="100" />
                 <Image Source="/SalonManager;component/Image/03中字.png" RenderTransformOrigin="1,1" Width="500" Height="100" />
-                <StackPanel Orientation="Vertical" Margin="0,20">
+                <StackPanel Orientation="Vertical" Margin="400,20">
                     <DatePicker SelectedDate="{Binding ChooseDate}" Width="137" HorizontalAlignment="Left" FontSize="18"></DatePicker>
                     <Border HorizontalAlignment="Left" Margin="0 5" BorderBrush="Black" BorderThickness="2" Width="375">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
@@ -385,21 +385,34 @@
                                     <DataGridTextColumn Binding="{Binding DateString}"
                                         IsReadOnly="True"
                                         Header="日期" Width="1*"/>
-                                    <DataGridTextColumn Binding="{Binding CustomerName}"
+                                    <DataGridTextColumn Binding="{Binding IsSpecifyCount}"
+                                        IsReadOnly="True"
+                                        Header="指定客數" Foreground="Black" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding UnSpecifyCount}"
+                                        IsReadOnly="True"
+                                        Header="不指定客數" Foreground="Black" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding ServiceDailyTotal}"
+                                        IsReadOnly="True"
+                                        Header="服務業積" Foreground="Black" Width="1*"/>
+                                    
+                                    <!--<DataGridTextColumn Binding="{Binding CustomerName}"
                                         IsReadOnly="True"
                                         Header="客戶名稱" Foreground="Blue" Width="1.5*" />
                                     <DataGridTextColumn Binding="{Binding EmployeeName}"
                                         IsReadOnly="True"
-                                        Header="服務員工" Foreground="Brown" Width="1.5*"/>
-                                    <DataGridCheckBoxColumn Binding="{Binding IsSpecify}"
+                                        Header="服務員工" Foreground="Brown" Width="1.5*"/>-->
+                                    <!--<DataGridCheckBoxColumn Binding="{Binding IsSpecify}"
                                         IsReadOnly="True"
-                                        Header="指定" Width="0.5*"/>
-                                    <DataGridTextColumn Binding="{Binding ConsumerGoods}"
+                                        Header="指定" Width="0.5*"/>-->
+                                    <!--<DataGridTextColumn Binding="{Binding ConsumerGoods}"
                                         IsReadOnly="True"
                                         Header="消費物品" Width="2*"/>
                                     <DataGridTextColumn Binding="{Binding Service}"
                                         IsReadOnly="True"
-                                        Header="服務內容" Width="2*"/>
+                                        Header="服務內容" Width="2*"/>-->
+                                    <DataGridTextColumn Binding="{Binding GoodsDailyTotal}"
+                                        IsReadOnly="True"
+                                        Header="物品業積" Foreground="Black" Width="1*"/>
                                     <DataGridTextColumn Binding="{Binding Cost}"
                                         IsReadOnly="True"
                                         Header="總金額" Foreground="Red" Width="1.5*"/>
@@ -426,7 +439,19 @@
                                     <DataGridTextColumn Binding="{Binding DateString}"
                                         IsReadOnly="True"
                                         Header="日期" Width="1*"/>
-                                    <DataGridTextColumn Binding="{Binding CustomerName}"
+                                    <DataGridTextColumn Binding="{Binding IsSpecifyCount}"
+                                        IsReadOnly="True"
+                                        Header="指定客數" Foreground="Black" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding UnSpecifyCount}"
+                                        IsReadOnly="True"
+                                        Header="不指定客數" Foreground="Black" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding ServiceDailyTotal}"
+                                        IsReadOnly="True"
+                                        Header="服務業積" Foreground="Black" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding GoodsDailyTotal}"
+                                        IsReadOnly="True"
+                                        Header="物品業積" Foreground="Black" Width="1*"/>
+                                    <!--<DataGridTextColumn Binding="{Binding CustomerName}"
                                         IsReadOnly="True"
                                         Header="客戶名稱" Foreground="Blue" Width="1.5*" />
                                     <DataGridTextColumn Binding="{Binding EmployeeName}"
@@ -440,7 +465,7 @@
                                         Header="消費物品" Width="2*"/>
                                     <DataGridTextColumn Binding="{Binding Service}"
                                         IsReadOnly="True"
-                                        Header="服務內容" Width="2*"/>
+                                        Header="服務內容" Width="2*"/>-->
                                     <DataGridTextColumn Binding="{Binding Cost}"
                                         IsReadOnly="True"
                                         Header="總金額" Foreground="Red" Width="1.5*"/>

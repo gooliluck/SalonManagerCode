@@ -140,8 +140,8 @@ namespace SalonManager.ViewModels
         #endregion
 
         #region MonthlyConsumptionCollection
-        private ObservableCollection<DailyConsumption> _monthlyConsumptionCollection;
-        public ObservableCollection<DailyConsumption> MonthlyConsumptionCollection
+        private ObservableCollection<MonthlyConsumption> _monthlyConsumptionCollection;
+        public ObservableCollection<MonthlyConsumption> MonthlyConsumptionCollection
         {
             get { return _monthlyConsumptionCollection; }
             set { _monthlyConsumptionCollection = value; if (MonthlyConsumptionView != null)MonthlyConsumptionView.Refresh(); }
@@ -155,8 +155,8 @@ namespace SalonManager.ViewModels
         #endregion
 
         #region YearlyConsumptionCollection
-        private ObservableCollection<DailyConsumption> _yearlyConsumptionCollection;
-        public ObservableCollection<DailyConsumption> YearlyConsumptionCollection
+        private ObservableCollection<MonthlyConsumption> _yearlyConsumptionCollection;
+        public ObservableCollection<MonthlyConsumption> YearlyConsumptionCollection
         {
             get { return _yearlyConsumptionCollection; }
             set { _yearlyConsumptionCollection = value; if (YearlyConsumptionView != null)YearlyConsumptionView.Refresh(); }
@@ -341,8 +341,8 @@ namespace SalonManager.ViewModels
             GoodsCollection = new ObservableCollection<Goods>();
             ServiceCollection = new ObservableCollection<Service>();
             DailyConsumptionCollection = new ObservableCollection<DailyConsumption>();
-            MonthlyConsumptionCollection = new ObservableCollection<DailyConsumption>();
-            YearlyConsumptionCollection = new ObservableCollection<DailyConsumption>();
+            MonthlyConsumptionCollection = new ObservableCollection<MonthlyConsumption>();
+            YearlyConsumptionCollection = new ObservableCollection<MonthlyConsumption>();
             OtherCostCollection = new ObservableCollection<OtherCost>();
 
             EmployeeView = CollectionViewSource.GetDefaultView(EmployeeCollection);
@@ -411,28 +411,8 @@ namespace SalonManager.ViewModels
             DailyConsumptionView = CollectionViewSource.GetDefaultView(DailyConsumptionCollection);
             DailyConsumptionView.Filter = new Predicate<object>(SearchFilter);
         }
-        private void LoadMonthlyConsumption()
+        private void LoadOtherCost()
         {
-            Dictionary<string, string> filter = new Dictionary<string, string>();
-            filter.Add("year", ChooseDate.Year.ToString());
-            filter.Add("month", ChooseDate.Month.ToString());
-            MonthlyConsumptionCollection = new ObservableCollection<DailyConsumption>();
-            List<DailyConsumption> dailyConsumptionList = DBConnection.ins().queryData<DailyConsumption>(filter);
-            int totalCost = 0;
-            foreach (DailyConsumption dailyConsumption in dailyConsumptionList)
-            {
-                totalCost += dailyConsumption.Cost;
-                MonthlyConsumptionCollection.Add(dailyConsumption);
-            }
-            DailyConsumption tatolConsumption = new DailyConsumption();
-            tatolConsumption.DateString = "本月累計";
-            tatolConsumption.Cost = totalCost;
-            MonthlyConsumptionCollection.Add(tatolConsumption);
-            MonthlyConsumptionView = CollectionViewSource.GetDefaultView(MonthlyConsumptionCollection);
-            MonthlyConsumptionView.Filter = new Predicate<object>(SearchFilter); 
-        }
-
-        private void LoadOtherCost() {
             Dictionary<string, string> filter = new Dictionary<string, string>();
             filter.Add("year", ChooseDate.Year.ToString());
             filter.Add("month", ChooseDate.Month.ToString());
@@ -450,9 +430,138 @@ namespace SalonManager.ViewModels
             OtherCostView.Filter = new Predicate<object>(SearchFilter);
             RaisePropertyChanged(() => TotalOtherCost);
         }
-        private void LoadYearlyConsumption()
+
+        private void LoadMonthlyConsumption()
         {
             Dictionary<string, string> filter = new Dictionary<string, string>();
+            filter.Add("year", ChooseDate.Year.ToString());
+            filter.Add("month", ChooseDate.Month.ToString());
+            MonthlyConsumptionCollection = new ObservableCollection<MonthlyConsumption>();
+            List<DailyConsumption> dailyConsumptionList = DBConnection.ins().queryData<DailyConsumption>(filter);
+
+            int monthdaycount = System.DateTime.DaysInMonth(ChooseDate.Year, ChooseDate.Month);
+            int totalCost = 0;
+            int IsSpecifyCountMonthtotal = 0;
+            int UnSpecifyCountMonthtotal = 0;
+            int ServiceMonthTotal = 0;
+            int GoodsMonthTotal = 0;
+            for (int cn = 0; cn < monthdaycount; cn++)
+            {
+                MonthlyConsumption dayConsumption = new MonthlyConsumption();
+                dayConsumption.setDate(ChooseDate.Year, ChooseDate.Month ,cn+1);
+                int day = dayConsumption.Day;
+                MonthlyConsumptionCollection.Add(dayConsumption);
+            }
+            
+            foreach (DailyConsumption dailyConsumption in dailyConsumptionList)
+            {
+                string[] serviceList = dailyConsumption.serviceId.Split(',');
+                string[] goodsList = dailyConsumption.consumerGoodsId.Split(',');
+                int servicetotal = 0;
+                int goodstotal = 0;
+                foreach (string tempStr in goodsList)
+                {
+                    string goodsId = tempStr;
+                    string providerId = "";
+                    int goodsPrice = 0;
+                    int goodsBonus = 0;
+                    string[] strs = tempStr.Split('-');
+                    if (strs.Length >= 4)
+                    {
+                        goodsId = strs[0];
+                        providerId = strs[1];
+                        Int32.TryParse(strs[2], out goodsPrice);
+                        Int32.TryParse(strs[3], out goodsBonus);
+                    }
+                    goodstotal += goodsPrice;
+                }
+                foreach (string tempStr in serviceList)
+                {
+                    string serviceId = tempStr;
+                    string providerId = "";
+                    int servicePrice = 0;
+                    int servicBonus = 0;
+                    string[] strs = tempStr.Split('-');
+                    if (strs.Length >= 4)
+                    {
+                        serviceId = strs[0];
+                        providerId = strs[1];
+                        Int32.TryParse(strs[2], out servicePrice);
+                        Int32.TryParse(strs[3], out servicBonus);
+                    }
+                    servicetotal += servicePrice;
+                }
+
+                //總數
+                totalCost += dailyConsumption.Cost;
+                if (servicetotal != 0)
+                {
+                    if (dailyConsumption.IsSpecify)
+                    { IsSpecifyCountMonthtotal += 1; }
+                    else
+                    { UnSpecifyCountMonthtotal += 1; }
+                }
+                
+                ServiceMonthTotal += servicetotal;
+                GoodsMonthTotal += goodstotal;
+                //end
+                 String datestring = dailyConsumption.DateString;
+                 foreach (MonthlyConsumption monthlycon in MonthlyConsumptionCollection)
+                 {
+                     if (monthlycon.day == dailyConsumption.day && monthlycon.year == dailyConsumption.year && monthlycon.month == dailyConsumption.month)
+                     {
+                         if (servicetotal != 0)
+                         {
+                             if (dailyConsumption.IsSpecify)
+                             { monthlycon.IsSpecifyCount += 1; }
+                             else
+                             { monthlycon.UnSpecifyCount += 1; }
+                         }
+                         
+                         monthlycon.Cost += dailyConsumption.Cost;
+                         monthlycon.ServiceDailyTotal += servicetotal;
+                         monthlycon.GoodsDailyTotal += goodstotal;
+                     }
+                 }
+            }
+            
+           MonthlyConsumption tatolConsumption = new MonthlyConsumption();
+           tatolConsumption.DateString = "本月累計";
+           tatolConsumption.Cost = totalCost;
+           tatolConsumption.IsSpecifyCount = IsSpecifyCountMonthtotal;
+           tatolConsumption.UnSpecifyCount = UnSpecifyCountMonthtotal;
+           tatolConsumption.ServiceDailyTotal = ServiceMonthTotal;
+           tatolConsumption.GoodsDailyTotal = GoodsMonthTotal;
+           MonthlyConsumptionCollection.Add(tatolConsumption);
+
+            /**
+             * 減掉雜項支出
+             */
+           Dictionary<string, string> otherfilter = new Dictionary<string, string>();
+           otherfilter.Add("year", ChooseDate.Year.ToString());
+           otherfilter.Add("month", ChooseDate.Month.ToString());
+           OtherCostCollection = new ObservableCollection<OtherCost>();
+           List<OtherCost> otherCostList = DBConnection.ins().queryData<OtherCost>(otherfilter);
+           int othercosttotal = 0;
+           foreach (OtherCost otherCost in otherCostList)
+           {
+               othercosttotal += otherCost.Cost;
+           }
+
+           MonthlyConsumption tatolProfitConsumption = new MonthlyConsumption();
+           tatolProfitConsumption.DateString = "本月總營收";
+           tatolProfitConsumption.Cost = totalCost - othercosttotal;
+
+           MonthlyConsumptionCollection.Add(tatolProfitConsumption);
+
+           MonthlyConsumptionView = CollectionViewSource.GetDefaultView(MonthlyConsumptionCollection);
+           MonthlyConsumptionView.Filter = new Predicate<object>(SearchFilter); 
+        }
+
+
+        private void LoadYearlyConsumption()
+        {
+            /*Dictionary<string, string> filter = new Dictionary<string, string>();
             filter.Add("year", ChooseDate.Year.ToString());
             YearlyConsumptionCollection = new ObservableCollection<DailyConsumption>();
             List<DailyConsumption> dailyConsumptionList = DBConnection.ins().queryData<DailyConsumption>(filter);
@@ -466,6 +575,128 @@ namespace SalonManager.ViewModels
             tatolConsumption.DateString = "今年累計";
             tatolConsumption.Cost = totalCost;
             YearlyConsumptionCollection.Add(tatolConsumption);
+            YearlyConsumptionView = CollectionViewSource.GetDefaultView(YearlyConsumptionCollection);
+            YearlyConsumptionView.Filter = new Predicate<object>(SearchFilter);*/
+            Dictionary<string, string> filter = new Dictionary<string, string>();
+            filter.Add("year", ChooseDate.Year.ToString());
+            YearlyConsumptionCollection = new ObservableCollection<MonthlyConsumption>();
+            List<DailyConsumption> dailyConsumptionList = DBConnection.ins().queryData<DailyConsumption>(filter);
+
+            int monthdaycount = 12;
+            int totalCost = 0;
+            int IsSpecifyCountMonthtotal = 0;
+            int UnSpecifyCountMonthtotal = 0;
+            int ServiceMonthTotal = 0;
+            int GoodsMonthTotal = 0;
+            for (int cn = 0; cn < monthdaycount; cn++)
+            {
+                MonthlyConsumption dayConsumption = new MonthlyConsumption();
+                dayConsumption.setDate(ChooseDate.Year, cn+1, 0);
+
+                YearlyConsumptionCollection.Add(dayConsumption);
+            }
+            foreach (DailyConsumption dailyConsumption in dailyConsumptionList)
+            {
+                string[] serviceList = dailyConsumption.serviceId.Split(',');
+                string[] goodsList = dailyConsumption.consumerGoodsId.Split(',');
+                int servicetotal = 0;
+                int goodstotal = 0;
+                foreach (string tempStr in goodsList)
+                {
+                    string goodsId = tempStr;
+                    string providerId = "";
+                    int goodsPrice = 0;
+                    int goodsBonus = 0;
+                    string[] strs = tempStr.Split('-');
+                    if (strs.Length >= 4)
+                    {
+                        goodsId = strs[0];
+                        providerId = strs[1];
+                        Int32.TryParse(strs[2], out goodsPrice);
+                        Int32.TryParse(strs[3], out goodsBonus);
+                    }
+                    goodstotal += goodsPrice;
+                }
+                foreach (string tempStr in serviceList)
+                {
+                    string serviceId = tempStr;
+                    string providerId = "";
+                    int servicePrice = 0;
+                    int servicBonus = 0;
+                    string[] strs = tempStr.Split('-');
+                    if (strs.Length >= 4)
+                    {
+                        serviceId = strs[0];
+                        providerId = strs[1];
+                        Int32.TryParse(strs[2], out servicePrice);
+                        Int32.TryParse(strs[3], out servicBonus);
+                    }
+                    servicetotal += servicePrice;
+                }
+
+                //總數
+                totalCost += dailyConsumption.Cost;
+
+                if (servicetotal != 0)
+                {
+                    if (dailyConsumption.IsSpecify)
+                    { IsSpecifyCountMonthtotal += 1; }
+                    else
+                    { UnSpecifyCountMonthtotal += 1; }
+                }
+                
+                ServiceMonthTotal += servicetotal;
+                GoodsMonthTotal += goodstotal;
+                //end
+                String datestring = dailyConsumption.DateString;
+                foreach (MonthlyConsumption monthlycon in YearlyConsumptionCollection)
+                {
+                    if (monthlycon.year == dailyConsumption.year && monthlycon.month == dailyConsumption.month)
+                    {
+                        if (servicetotal != 0)
+                        {
+                            if (dailyConsumption.IsSpecify)
+                            { monthlycon.IsSpecifyCount += 1; }
+                            else
+                            { monthlycon.UnSpecifyCount += 1; }
+                        }
+                       
+                        monthlycon.Cost += dailyConsumption.Cost;
+                        monthlycon.ServiceDailyTotal += servicetotal;
+                        monthlycon.GoodsDailyTotal += goodstotal;
+                    }
+                }
+            }
+            MonthlyConsumption tatolConsumption = new MonthlyConsumption();
+            tatolConsumption.DateString = "今年累計";
+            tatolConsumption.Cost = totalCost;
+            tatolConsumption.IsSpecifyCount = IsSpecifyCountMonthtotal;
+            tatolConsumption.UnSpecifyCount = UnSpecifyCountMonthtotal;
+            tatolConsumption.ServiceDailyTotal = ServiceMonthTotal;
+            tatolConsumption.GoodsDailyTotal = GoodsMonthTotal;
+            YearlyConsumptionCollection.Add(tatolConsumption);
+
+            /**
+             * 減掉雜項支出
+             */
+            Dictionary<string, string> otherfilter = new Dictionary<string, string>();
+            otherfilter.Add("year", ChooseDate.Year.ToString());
+            OtherCostCollection = new ObservableCollection<OtherCost>();
+            List<OtherCost> otherCostList = DBConnection.ins().queryData<OtherCost>(otherfilter);
+            int othercosttotal = 0;
+            foreach (OtherCost otherCost in otherCostList)
+            {
+                othercosttotal += otherCost.Cost;
+            }
+
+            MonthlyConsumption tatolProfitConsumption = new MonthlyConsumption();
+            tatolProfitConsumption.DateString = "本年總營收";
+            tatolProfitConsumption.Cost = totalCost - othercosttotal;
+
+            YearlyConsumptionCollection.Add(tatolProfitConsumption);
+
+
+
             YearlyConsumptionView = CollectionViewSource.GetDefaultView(YearlyConsumptionCollection);
             YearlyConsumptionView.Filter = new Predicate<object>(SearchFilter);
         }
@@ -543,6 +774,13 @@ namespace SalonManager.ViewModels
                 OtherCostCollection.Remove((OtherCost)target);
                 DBConnection.ins().deleteData<OtherCost>(target);
                 LoadOtherCost();
+                LoadMonthlyConsumption();
+                LoadYearlyConsumption();
+                return true;
+            }
+            else if (target is Acount)
+            {
+
                 return true;
             }
             return false;
@@ -654,6 +892,8 @@ namespace SalonManager.ViewModels
                     ((OtherCost)target).dbid = id;
                 }
                 LoadOtherCost();
+                LoadMonthlyConsumption();
+                LoadYearlyConsumption();
                 return true;
             }
             return false;
