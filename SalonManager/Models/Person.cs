@@ -16,12 +16,13 @@ namespace SalonManager.Models
     {
         #region Ctor
         public Person():base(){}
-        public Person(string name, GENDER_TYPE gender, string tel)
+        public Person(string name, GENDER_TYPE gender, string tel, DateTime birthDate)
             : base()
         {
             Name = name;
             GenderType = gender;
             Tel = tel;
+            BirthDate = birthDate.ToShortDateString();
         }
         #endregion
 
@@ -70,10 +71,17 @@ namespace SalonManager.Models
         #endregion
 
         #region BirthDate
-        private DateTime birthDate;
+        public DateTime birthDate;
         public string BirthDate
         {
             get { return birthDate.ToShortDateString(); }
+            set {
+                if (DateTime.TryParse(value, out birthDate))
+                {
+                    Console.WriteLine(birthDate);
+                }
+               // birthDate = value; 
+            }
         }
 
         #endregion

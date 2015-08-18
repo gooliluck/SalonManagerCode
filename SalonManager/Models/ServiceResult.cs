@@ -42,7 +42,13 @@ namespace SalonManager.Models
                 yearlyNumber = value;
             }
         }
-
+      //  指定 
+//非指定
+//服務抽成
+//產品抽成
+//虛業績
+//實業績
+        
 
     }
 }

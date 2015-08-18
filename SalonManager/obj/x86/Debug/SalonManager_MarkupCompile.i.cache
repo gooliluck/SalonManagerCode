@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\user\Desktop\LOG\SalonManagerCode\SalonManager\obj\x86\Debug\
+D:\GitHub\SalonManagerCode\SalonManager\obj\x86\Debug\
 SalonManager
 none
 false
 DEBUG;TRACE
-C:\Users\user\Desktop\LOG\SalonManagerCode\SalonManager\App.xaml
-171299040214
+D:\GitHub\SalonManagerCode\SalonManager\App.xaml
+18-2040218311
 
-41-1048832941
-161989818269
-Resources\IconsResourceDictionary.xaml;Resources\StylesResourceDictionary.xaml;Views\ChangePasswordWindow.xaml;Views\ComsumeDetailWindow.xaml;Views\CustomerInfo.xaml;Views\DailyConsumptionInfo.xaml;Views\EmployeeDetailWindow.xaml;Views\EmployeeInfo.xaml;Views\GoodsInfo.xaml;Views\InfoWindow.xaml;Views\InputNumWindow.xaml;Views\OtherCostInfo.xaml;Views\PasswordWindow.xaml;Views\PersonInfo.xaml;Views\MainWindow.xaml;Views\PrintWindow.xaml;Views\ServiceInfo.xaml;
+42-788777666
+16-739672558
+Resources\IconsResourceDictionary.xaml;Resources\StylesResourceDictionary.xaml;Views\EmployeeChangePasswordWindow.xaml;Views\ChangePasswordWindow.xaml;Views\ComsumeDetailWindow.xaml;Views\CustomerInfo.xaml;Views\DailyConsumptionInfo.xaml;Views\EmployeeDetailWindow.xaml;Views\EmployeeInfo.xaml;Views\GoodsInfo.xaml;Views\InfoWindow.xaml;Views\InputNumWindow.xaml;Views\OtherCostInfo.xaml;Views\PasswordWindow.xaml;Views\PersonInfo.xaml;Views\MainWindow.xaml;Views\PrintWindow.xaml;Views\ServiceInfo.xaml;
 
-False
+True
 

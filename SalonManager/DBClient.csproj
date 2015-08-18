@@ -114,6 +114,9 @@
     <Compile Include="Models\OtherCost.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\ServiceResult.cs" />
+    <Compile Include="Views\EmployeeChangePasswordWindow.xaml.cs">
+      <DependentUpon>EmployeeChangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
     <Page Include="Resources\StylesResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeChangePasswordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>

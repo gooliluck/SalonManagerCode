@@ -29,6 +29,8 @@ namespace SalonManager.Views
         {
             String pw = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(System.Runtime.InteropServices.Marshal.SecureStringToBSTR(this.Password.SecurePassword));
             String nowPw = SalonManager.Properties.Settings.Default.Password;
+            String memberpw = SalonManager.Properties.Settings.Default.MemberPassword;
+            
             if (pw.Equals(defaultPassword) || pw.Equals(nowPw))
             {
                 closebypwd = true;

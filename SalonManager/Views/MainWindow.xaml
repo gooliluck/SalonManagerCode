@@ -117,6 +117,9 @@
                                     <DataGridTextColumn Binding="{Binding GenderString}"
                                         IsReadOnly="True"
                                         Header="性別" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding DateString}"
+                                        IsReadOnly="True"
+                                        Header="生日" Width="1*"/>
                                     <DataGridTextColumn Binding="{Binding Tel}"
                                         IsReadOnly="True"
                                         Header="電話" Width="1*"/>
@@ -487,6 +490,7 @@
                             <Button Name="BackUpDB" Click="BackUpDB_Click" Content="匯出資料庫" Margin="10" Height="Auto"></Button>
                             <Button Name="ImportDB" Click="ImportDB_Click"  Content="匯入資料庫" Margin="10" Height="Auto"></Button>
                             <Button Name="ChangePW" Click="ChangePW_Click"  Content="變更密碼" Margin="10" Height="Auto"></Button>
+                            <Button Name="EmployeeChangePW" Click="ChangeEmployeePW_Click"  Content="變更員工密碼" Margin="10" Height="Auto"></Button>
                         </StackPanel>
                     </Grid>
                 </TabItem>

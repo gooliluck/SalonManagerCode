@@ -13,7 +13,7 @@ namespace SalonManager.Models
     {
         public Employee():base(){}
         public Employee(string name, GENDER_TYPE gender, string tel, string post, int basicSalary, int commission)
-            : base(name, gender, tel)
+            : base(name, gender, tel,birthDate)
         {
             Post = post;
             BasicSalary = basicSalary;

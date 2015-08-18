@@ -79,7 +79,11 @@ namespace SalonManager.Views
             ChangePasswordWindow window = new ChangePasswordWindow();
             window.ShowDialog();
         }
-
+        private void ChangeEmployeePW_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeChangePasswordWindow window = new EmployeeChangePasswordWindow();
+            window.ShowDialog();
+        }
         private void PrintYearButton_Click(object sender, RoutedEventArgs e)
         {
             Printer.print(YearlyConsumptionsGrid);

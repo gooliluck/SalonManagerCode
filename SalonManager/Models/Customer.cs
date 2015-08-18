@@ -13,7 +13,7 @@ namespace SalonManager.Models
     {
         public Customer() : base() { }
         public Customer(string name, GENDER_TYPE gender, string tel, string address, int payment)
-            : base(name, gender, tel)
+            : base(name, gender, tel,birthDate)
         {
             Address = address;
             Payment = payment;

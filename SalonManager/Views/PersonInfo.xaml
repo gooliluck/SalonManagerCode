@@ -24,6 +24,12 @@
         </Border>
         <Border Style="{StaticResource InfoBorderStyle}">
             <StackPanel Orientation="Horizontal">
+                <TextBlock Text="生日" Name="BirthDate" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
+                <TextBox Text="{Binding BirthDate}" Name="BirthText" FontSize="18"/>
+            </StackPanel>
+        </Border>
+        <Border Style="{StaticResource InfoBorderStyle}">
+            <StackPanel Orientation="Horizontal">
                 <TextBlock Text="性別" Name="Gender" Style="{StaticResource InfoTxtStyle}" FontSize="18" Width="70"/>
                 <ComboBox Name="GenderBox" Width="150" Margin="5" SelectedIndex="{Binding GenderInt}" FontSize="18">
                     <ComboBoxItem Content="未知" />
