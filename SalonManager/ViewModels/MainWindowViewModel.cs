@@ -445,6 +445,7 @@ namespace SalonManager.ViewModels
             int UnSpecifyCountMonthtotal = 0;
             int ServiceMonthTotal = 0;
             int GoodsMonthTotal = 0;
+            int GoodsMonthCostTotal = 0;
             for (int cn = 0; cn < monthdaycount; cn++)
             {
                 MonthlyConsumption dayConsumption = new MonthlyConsumption();
@@ -459,9 +460,11 @@ namespace SalonManager.ViewModels
                 string[] goodsList = dailyConsumption.consumerGoodsId.Split(',');
                 int servicetotal = 0;
                 int goodstotal = 0;
+                int goodsCosttotal = 0; 
                 foreach (string tempStr in goodsList)
                 {
                     string goodsId = tempStr;
+                    Console.Out.WriteLine("line is {0}",tempStr);
                     string providerId = "";
                     int goodsPrice = 0;
                     int goodsBonus = 0;
@@ -473,11 +476,16 @@ namespace SalonManager.ViewModels
                         Int32.TryParse(strs[2], out goodsPrice);
                         Int32.TryParse(strs[3], out goodsBonus);
                     }
+                    Goods good = GetGoodsById(goodsId);
+                    if(good != null){
+                        goodsCosttotal += good.Cost;
+                    }
                     goodstotal += goodsPrice;
                 }
                 foreach (string tempStr in serviceList)
                 {
                     string serviceId = tempStr;
+                    
                     string providerId = "";
                     int servicePrice = 0;
                     int servicBonus = 0;
@@ -504,6 +512,7 @@ namespace SalonManager.ViewModels
                 
                 ServiceMonthTotal += servicetotal;
                 GoodsMonthTotal += goodstotal;
+                GoodsMonthCostTotal += goodsCosttotal;
                 //end
                  String datestring = dailyConsumption.DateString;
                  foreach (MonthlyConsumption monthlycon in MonthlyConsumptionCollection)
@@ -521,6 +530,7 @@ namespace SalonManager.ViewModels
                          monthlycon.Cost += dailyConsumption.Cost;
                          monthlycon.ServiceDailyTotal += servicetotal;
                          monthlycon.GoodsDailyTotal += goodstotal;
+                         monthlycon.GoodCost += goodsCosttotal;
                      }
                  }
             }
@@ -532,6 +542,7 @@ namespace SalonManager.ViewModels
            tatolConsumption.UnSpecifyCount = UnSpecifyCountMonthtotal;
            tatolConsumption.ServiceDailyTotal = ServiceMonthTotal;
            tatolConsumption.GoodsDailyTotal = GoodsMonthTotal;
+           tatolConsumption.GoodCost = GoodsMonthCostTotal;
            MonthlyConsumptionCollection.Add(tatolConsumption);
 
             /**
@@ -588,6 +599,7 @@ namespace SalonManager.ViewModels
             int UnSpecifyCountMonthtotal = 0;
             int ServiceMonthTotal = 0;
             int GoodsMonthTotal = 0;
+            int GoodsMonthCostTotal = 0;
             for (int cn = 0; cn < monthdaycount; cn++)
             {
                 MonthlyConsumption dayConsumption = new MonthlyConsumption();
@@ -601,6 +613,7 @@ namespace SalonManager.ViewModels
                 string[] goodsList = dailyConsumption.consumerGoodsId.Split(',');
                 int servicetotal = 0;
                 int goodstotal = 0;
+                int goodcosttotal = 0;
                 foreach (string tempStr in goodsList)
                 {
                     string goodsId = tempStr;
@@ -614,6 +627,11 @@ namespace SalonManager.ViewModels
                         providerId = strs[1];
                         Int32.TryParse(strs[2], out goodsPrice);
                         Int32.TryParse(strs[3], out goodsBonus);
+                    }
+                    Goods good = GetGoodsById(goodsId);
+                    if (good != null)
+                    {
+                        goodcosttotal += good.Cost;
                     }
                     goodstotal += goodsPrice;
                 }
@@ -647,6 +665,7 @@ namespace SalonManager.ViewModels
                 
                 ServiceMonthTotal += servicetotal;
                 GoodsMonthTotal += goodstotal;
+                GoodsMonthCostTotal += goodcosttotal;
                 //end
                 String datestring = dailyConsumption.DateString;
                 foreach (MonthlyConsumption monthlycon in YearlyConsumptionCollection)
@@ -664,6 +683,7 @@ namespace SalonManager.ViewModels
                         monthlycon.Cost += dailyConsumption.Cost;
                         monthlycon.ServiceDailyTotal += servicetotal;
                         monthlycon.GoodsDailyTotal += goodstotal;
+                        monthlycon.GoodCost += goodcosttotal;
                     }
                 }
             }
@@ -674,6 +694,7 @@ namespace SalonManager.ViewModels
             tatolConsumption.UnSpecifyCount = UnSpecifyCountMonthtotal;
             tatolConsumption.ServiceDailyTotal = ServiceMonthTotal;
             tatolConsumption.GoodsDailyTotal = GoodsMonthTotal;
+            tatolConsumption.GoodCost = GoodsMonthCostTotal;
             YearlyConsumptionCollection.Add(tatolConsumption);
 
             /**

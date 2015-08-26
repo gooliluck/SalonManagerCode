@@ -48,6 +48,9 @@
                                     <DataGridTextColumn Binding="{Binding GenderString}"
                                 		IsReadOnly="True"
                                 		Header="性別" Width="0.5*"/>
+                                    <DataGridTextColumn Binding="{Binding BirthDate}"
+                                        IsReadOnly="True"
+                                        Header="生日" Width="1*"/>
                                     <DataGridTextColumn Binding="{Binding Tel}"
                                 		IsReadOnly="True"
                                 		Header="電話" Width="1*"/>
@@ -117,7 +120,7 @@
                                     <DataGridTextColumn Binding="{Binding GenderString}"
                                         IsReadOnly="True"
                                         Header="性別" Width="0.5*"/>
-                                    <DataGridTextColumn Binding="{Binding DateString}"
+                                    <DataGridTextColumn Binding="{Binding BirthDate}"
                                         IsReadOnly="True"
                                         Header="生日" Width="1*"/>
                                     <DataGridTextColumn Binding="{Binding Tel}"
@@ -416,6 +419,9 @@
                                     <DataGridTextColumn Binding="{Binding GoodsDailyTotal}"
                                         IsReadOnly="True"
                                         Header="物品業積" Foreground="Black" Width="1*"/>
+                                    <DataGridTextColumn Binding="{Binding GoodCost}"
+                                        IsReadOnly="True"
+                                        Header="產品成本總合" Foreground="Black" Width="1*"/>
                                     <DataGridTextColumn Binding="{Binding Cost}"
                                         IsReadOnly="True"
                                         Header="總金額" Foreground="Red" Width="1.5*"/>
@@ -469,6 +475,9 @@
                                     <DataGridTextColumn Binding="{Binding Service}"
                                         IsReadOnly="True"
                                         Header="服務內容" Width="2*"/>-->
+                                    <DataGridTextColumn Binding="{Binding GoodCost}"
+                                        IsReadOnly="True"
+                                        Header="產品成本總合" Foreground="Black" Width="1*"/>
                                     <DataGridTextColumn Binding="{Binding Cost}"
                                         IsReadOnly="True"
                                         Header="總金額" Foreground="Red" Width="1.5*"/>

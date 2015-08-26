@@ -71,16 +71,15 @@ namespace SalonManager.Models
         #endregion
 
         #region BirthDate
-        public DateTime birthDate;
+        public static DateTime birthDate;
         public string BirthDate
         {
             get { return birthDate.ToShortDateString(); }
             set {
                 if (DateTime.TryParse(value, out birthDate))
                 {
-                    Console.WriteLine(birthDate);
+                    Console.Out.WriteLine("write date {0}",birthDate.ToShortDateString());
                 }
-               // birthDate = value; 
             }
         }
 

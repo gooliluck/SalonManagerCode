@@ -86,6 +86,13 @@ namespace SalonManager.Models
             set { cost = value; }
         }
 
+        public int goodcost = 0;
+        public int GoodCost
+        {
+            get { return goodcost; }
+            set { goodcost = value; }
+        }
+
     }
             
 }

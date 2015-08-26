@@ -16,5 +16,5 @@ D:\GitHub\SalonManagerCode\SalonManager\App.xaml
 16-739672558
 Resources\IconsResourceDictionary.xaml;Resources\StylesResourceDictionary.xaml;Views\EmployeeChangePasswordWindow.xaml;Views\ChangePasswordWindow.xaml;Views\ComsumeDetailWindow.xaml;Views\CustomerInfo.xaml;Views\DailyConsumptionInfo.xaml;Views\EmployeeDetailWindow.xaml;Views\EmployeeInfo.xaml;Views\GoodsInfo.xaml;Views\InfoWindow.xaml;Views\InputNumWindow.xaml;Views\OtherCostInfo.xaml;Views\PasswordWindow.xaml;Views\PersonInfo.xaml;Views\MainWindow.xaml;Views\PrintWindow.xaml;Views\ServiceInfo.xaml;
 
-True
+False
 
