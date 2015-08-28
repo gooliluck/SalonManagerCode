@@ -22,7 +22,7 @@ namespace SalonManager.Models
             Name = name;
             GenderType = gender;
             Tel = tel;
-            BirthDate = birthDate.ToShortDateString();
+            BirthDate = birthDate.ToShortDateString(); ;
         }
         #endregion
 
@@ -71,18 +71,13 @@ namespace SalonManager.Models
         #endregion
 
         #region BirthDate
-        public static DateTime birthDate;
+        public DateTime birthDate = new DateTime();
         public string BirthDate
         {
             get { return birthDate.ToShortDateString(); }
-            set {
-                if (DateTime.TryParse(value, out birthDate))
-                {
-                    Console.Out.WriteLine("write date {0}",birthDate.ToShortDateString());
-                }
-            }
+            set { DateTime.TryParse(value, out birthDate); }
         }
-
+  
         #endregion
 
         #region Age
@@ -91,10 +86,13 @@ namespace SalonManager.Models
             get
             {
                 DateTime nowTime = DateTime.Now;
+                
                 if (birthDate == null)
                     return 0;
                 else
                 {
+                    //DateTime agebirthDate;
+                    //DateTime.TryParse(birthDate, out agebirthDate);
                     int age = (nowTime - birthDate).Days / 365;
                     return age;
                 }
@@ -104,6 +102,10 @@ namespace SalonManager.Models
 
         #region Comment
         public string comment = "";
+        private string name1;
+        private GENDER_TYPE gender1;
+        private string tel1;
+        private string birthDate1;
         public string Comment
         {
             get { return comment; }

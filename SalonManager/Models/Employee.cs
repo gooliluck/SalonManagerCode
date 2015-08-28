@@ -12,8 +12,8 @@ namespace SalonManager.Models
     public class Employee : Person
     {
         public Employee():base(){}
-        public Employee(string name, GENDER_TYPE gender, string tel, string post, int basicSalary, int commission)
-            : base(name, gender, tel,birthDate)
+        public Employee(string name, GENDER_TYPE gender, string tel, string post, int basicSalary, int commission, DateTime birthdate)
+            : base(name, gender, tel, birthdate)
         {
             Post = post;
             BasicSalary = basicSalary;

@@ -196,13 +196,26 @@ namespace SalonManager.Helpers
             DataSet dataSet = ExecuteQuery(queryString);
             DataTable table = dataSet.Tables[0];
             int dataCount = table.Rows.Count;
+            if (type.Equals(typeof(Employee)))
+            {
+                System.Console.WriteLine("type is employee");
+                System.Console.WriteLine("queryString is {0}", queryString);
+                System.Console.WriteLine(table.Columns);
+                foreach (DataRow row in table.Rows)
+                {
+                    System.Console.WriteLine(row.Table.Columns.Count);
+                    foreach (DataColumn col in row.Table.Columns)
+                    {
+                        System.Console.WriteLine(row[col.ColumnName]);
+                    }
+                }
+            }
             for (int i = 0; i < dataCount; i++)
             {
                 ConstructorInfo ci = type.GetConstructor(Type.EmptyTypes);
                 T data = (T)ci.Invoke(null);
                 foreach (FieldInfo info in infos)
                 {
-                    
                     object fieldData = table.Rows[i][info.Name];
                     if (fieldData != null && !fieldData.ToString().Equals(""))
                     {
@@ -214,6 +227,12 @@ namespace SalonManager.Helpers
                         else if (info.FieldType == typeof(bool)) {
                             bool res = bool.Parse(fieldData.ToString());
                             info.SetValue(data, res);
+                        }
+                        else if (info.Name == "birthDate")
+                        {
+                            DateTime date = new DateTime();
+                            DateTime.TryParse(fieldData.ToString(),out date);
+                            info.SetValue(data, date);
                         }else
                         {
                             info.SetValue(data, fieldData);

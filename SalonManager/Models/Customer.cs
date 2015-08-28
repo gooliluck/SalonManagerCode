@@ -12,8 +12,8 @@ namespace SalonManager.Models
     public class Customer : Person
     {
         public Customer() : base() { }
-        public Customer(string name, GENDER_TYPE gender, string tel, string address, int payment)
-            : base(name, gender, tel,birthDate)
+        public Customer(string name, GENDER_TYPE gender, string tel, string address, int payment, DateTime birthdate)
+            : base(name, gender, tel, birthdate)
         {
             Address = address;
             Payment = payment;

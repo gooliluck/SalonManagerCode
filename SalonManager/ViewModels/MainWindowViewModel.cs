@@ -370,6 +370,7 @@ namespace SalonManager.ViewModels
             {
                 employee.setDeleteDelegate(DeleteData);
                 employee.setUpdateDelegate(UpdateData);
+                
                 EmployeeCollection.Add(employee);
             }
             List<Customer> customerList = DBConnection.ins().queryData<Customer>();
@@ -464,7 +465,7 @@ namespace SalonManager.ViewModels
                 foreach (string tempStr in goodsList)
                 {
                     string goodsId = tempStr;
-                    Console.Out.WriteLine("line is {0}",tempStr);
+                    //Console.Out.WriteLine("line is {0}",tempStr);
                     string providerId = "";
                     int goodsPrice = 0;
                     int goodsBonus = 0;
@@ -732,7 +733,8 @@ namespace SalonManager.ViewModels
                     RandomHelper.RandomString(10, true),
                     RandomHelper.RandomString(10, true),
                     RandomHelper.RandomInt(19000,50000),
-                    RandomHelper.RandomInt(0, 100)
+                    RandomHelper.RandomInt(0, 100),
+                    RandomHelper.RandomDate()
                     );
                 employee.setDeleteDelegate(DeleteData);
                 employee.setUpdateDelegate(UpdateData);
@@ -747,7 +749,8 @@ namespace SalonManager.ViewModels
                     (GENDER_TYPE)RandomHelper.RandomInt(1, 3),
                     RandomHelper.RandomString(10, true),
                     RandomHelper.RandomString(10, true),
-                    RandomHelper.RandomInt(1000, 10000)
+                    RandomHelper.RandomInt(1000, 10000),
+                    RandomHelper.RandomDate()
                     );
                 customer.setDeleteDelegate(DeleteData);
                 customer.setUpdateDelegate(UpdateData);
