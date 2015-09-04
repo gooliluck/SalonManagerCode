@@ -17,16 +17,26 @@ namespace SalonManager.Views
         public MainWindow()
         {
             InitializeComponent();
+            System.Console.WriteLine("open MainWindow");
+            if (SalonManager.Properties.Settings.Default.isMaster == false)
+            {
+                YearlyConsumptions.Visibility = System.Windows.Visibility.Collapsed;
+                MonthlyConsumptions.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            System.Console.WriteLine("open line");
             e.Handled = true;
+            
+            
         }
 
         private void BackUpDB_Click(object sender, RoutedEventArgs e)
         {
+
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.DefaultExt = ".db";
             dialog.Filter = "DataBase(.db)|*.db";

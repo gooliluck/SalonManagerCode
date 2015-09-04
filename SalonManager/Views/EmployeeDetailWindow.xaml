@@ -117,6 +117,32 @@
                         <Button Content="列印" Margin="10" HorizontalAlignment="Center"  Name="YearlyPrintServicesButton" Foreground="White" Background="Lime" Click="PrintServicesButton_Click" FontSize="18" Height="Auto"/>
                     </StackPanel>
                 </TabItem>
+                <TabItem Header="   薪資表    " Name="SalaryList" FontSize="18">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <DataGrid Name="SalaryListGrid" Width="850" Height="400" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="try1" Width="1*" CanUserSort="False" CanUserReorder="False"/>
+                                <DataGridTextColumn Header="try2" Width="1*" CanUserSort="False" CanUserReorder="False"/>
+                                <DataGridTextColumn Header="try3" Width="1*" CanUserSort="False" CanUserReorder="False"/>
+                                <DataGridTemplateColumn Header="Editable Value">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Value}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Value}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                            
+                        </DataGrid>
+                        <Button Content="列印" Margin="10" HorizontalAlignment="Center"  Name="SalaryPrintListButton" Foreground="White" Background="Lime" Click="PrintServicesButton_Click" FontSize="18" Height="Auto"/>
+                        
+                    </StackPanel>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </Grid>

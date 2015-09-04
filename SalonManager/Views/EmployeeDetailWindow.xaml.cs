@@ -26,6 +26,7 @@ namespace SalonManager.Views
         public EmployeeDetailWindow()
         {
             InitializeComponent();
+            
         }
         public void setData(Employee data,List<DailyConsumption> list)
         {
@@ -176,7 +177,10 @@ namespace SalonManager.Views
             this.CaculateText.Text = data.BasicSalary + " + " + totalBonus + " = ";
             this.TotalSalaryText.Text = (data.BasicSalary + totalBonus).ToString();
         }
+        private void SelectionClicked(object sender, RoutedEventArgs e)
+        {
 
+        }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

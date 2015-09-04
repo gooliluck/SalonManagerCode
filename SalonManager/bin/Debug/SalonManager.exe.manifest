@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SalonManager.exe" size="443904">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SalonManager.exe" size="445440">
       <assemblyIdentity name="SalonManager" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Lw+rLjfxgTCrk1nxgCfqagJQuk0=</dsig:DigestValue>
+        <dsig:DigestValue>SlAtcwQKQuz5CUnfZ1Q6ojqOerI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,13 +90,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="SalonManager.exe.config" size="1050">
+  <file name="SalonManager.exe.config" size="1172">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>qe6k1ywBhjr8Hqvuu3LdMVpmvgY=</dsig:DigestValue>
+      <dsig:DigestValue>MJ7jTYhGRocR72d9NXVE7ZaGEqs=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Visualpharm-Icons8-Metro-Style-Hair-Stuff-Hair-clip.ico" size="107377">

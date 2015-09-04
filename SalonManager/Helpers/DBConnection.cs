@@ -48,6 +48,7 @@ namespace SalonManager.Helpers
                 connection = new SQLiteConnection("Data Source = " + path);
                 connection.Open();
                 connection.ChangePassword(password);
+                
             }
         }
         private string typeToTableName(Type type)
@@ -228,13 +229,11 @@ namespace SalonManager.Helpers
                             bool res = bool.Parse(fieldData.ToString());
                             info.SetValue(data, res);
                         }
-                        else if (info.Name == "birthDate")
-                        {
+                        else if (info.Name == "birthDate") {
                             DateTime date = new DateTime();
                             DateTime.TryParse(fieldData.ToString(),out date);
                             info.SetValue(data, date);
-                        }else
-                        {
+                        }else{
                             info.SetValue(data, fieldData);
                         }
                         
