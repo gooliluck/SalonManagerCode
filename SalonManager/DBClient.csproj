@@ -109,6 +109,9 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DailyConsumption.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeMonthlyResult.cs" />
+    <Compile Include="Models\EmployeeSalaryListResult.cs" />
+    <Compile Include="Models\EmployeeYearlyResult.cs" />
     <Compile Include="Models\Goods.cs" />
     <Compile Include="Models\MonthlyConsumption.cs" />
     <Compile Include="Models\OtherCost.cs" />

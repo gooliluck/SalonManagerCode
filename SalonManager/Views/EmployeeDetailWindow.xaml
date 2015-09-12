@@ -119,28 +119,23 @@
                 </TabItem>
                 <TabItem Header="   薪資表    " Name="SalaryList" FontSize="18">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <DataGrid Name="SalaryListGrid" Width="850" Height="400" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False" >
+                        <DataGrid Name="SalaryListGrid" Width="850" Height="400" HeadersVisibility="None" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="try1" Width="1*" CanUserSort="False" CanUserReorder="False"/>
-                                <DataGridTextColumn Header="try2" Width="1*" CanUserSort="False" CanUserReorder="False"/>
-                                <DataGridTextColumn Header="try3" Width="1*" CanUserSort="False" CanUserReorder="False"/>
-                                <DataGridTemplateColumn Header="Editable Value">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Value}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                    <DataGridTemplateColumn.CellEditingTemplate>
-                                        <DataTemplate>
-                                            <TextBox Text="{Binding Value}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellEditingTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="SalaryName" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[0]}"/>
+                                <DataGridTextColumn Header="Salary1" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[1]}"/>
+                                <DataGridTextColumn Header="Salary2" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[2]}"/>
+                                <DataGridTextColumn Header="Salary3" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[3]}"/>
+                                <DataGridTextColumn Header="Salary4" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[4]}"/>
+                                <DataGridTextColumn Header="Salary5" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[5]}"/>
+                                <DataGridTextColumn Header="Salary6" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[6]}"/>
+                                <DataGridTextColumn Header="Salary7" Width="1*" CanUserSort="False" CanUserReorder="False" Binding="{Binding ListName[7]}"/>
                             </DataGrid.Columns>
-                            
+
                         </DataGrid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                            <Button Content="更新計算" Margin="10" HorizontalAlignment="Center"  Name="RecountButton" Foreground="White" Background="Red" Click="RecountButton_Click" FontSize="18" Height="Auto"/>
                         <Button Content="列印" Margin="10" HorizontalAlignment="Center"  Name="SalaryPrintListButton" Foreground="White" Background="Lime" Click="PrintServicesButton_Click" FontSize="18" Height="Auto"/>
-                        
+                        </StackPanel>
                     </StackPanel>
                 </TabItem>
             </TabControl>
