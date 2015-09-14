@@ -20,6 +20,12 @@ namespace SalonManager.Models
                 serviceName = value;
             }
         }
+        private int designermonthly = 0;
+        public int DesignerMonthly
+        {
+            get { return designermonthly; }
+            set { designermonthly = value; }
+        }
         private int monthlyNumber = 0;
         public int MonthlyNumber
         {
@@ -29,6 +35,12 @@ namespace SalonManager.Models
             set {
                 monthlyNumber = value;
             }
+        }
+        private int designeryearly = 0;
+        public int DesignerYearly
+        {
+            get { return designeryearly; }
+            set { designeryearly = value; }
         }
         private int yearlyNumber = 0;
         public int YearlyNumber
@@ -42,12 +54,6 @@ namespace SalonManager.Models
                 yearlyNumber = value;
             }
         }
-      //  指定 
-//非指定
-//服務抽成
-//產品抽成
-//虛業績
-//實業績
         
 
     }

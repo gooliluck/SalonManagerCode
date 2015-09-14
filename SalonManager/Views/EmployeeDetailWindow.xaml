@@ -49,18 +49,19 @@
                                 <DataGridTextColumn Binding="{Binding ServiceName}"
                                         IsReadOnly="True"
                                         Header="服務項目" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding DesignerMonthly}"
+                                        IsReadOnly="True"
+                                        Header="月設計師客數" Foreground="Red" Width="1*"/>
                                 <DataGridTextColumn Binding="{Binding MonthlyNumber}"
                                         IsReadOnly="True"
-                                        Header="月服務客數" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding MonthlyNumber}"
+                                        Header="月服務客數" Foreground="Red" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding DesignerYearly}"
                                         IsReadOnly="True"
-                                        Header="月設計師客數" Foreground="Blue" Width="1*"/>
+                                        Header="年設計師客數" Foreground="Blue" Width="1*"/>
                                 <DataGridTextColumn Binding="{Binding YearlyNumber}"
                                         IsReadOnly="True"
                                         Header="年服務客數" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding YearlyNumber}"
-                                        IsReadOnly="True"
-                                        Header="年設計師客數" Foreground="Blue" Width="1*"/>
+                                
                             </DataGrid.Columns>
                         </DataGrid>
                         <Button Content="列印" Margin="10" HorizontalAlignment="Center"  Name="PrintServicesButton" Foreground="White" Background="Lime" Click="PrintServicesButton_Click" FontSize="18" Height="Auto"/>

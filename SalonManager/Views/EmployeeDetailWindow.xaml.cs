@@ -46,7 +46,7 @@ namespace SalonManager.Views
             {
                 int bonus = 0;
                 int day = 0;
-                int leftCost = 0;
+                int leftCost = dailyConsumption.Cost;
                 string[] supportList = dailyConsumption.supporterId.Split(',');
                 List<string> tempList = new List<string>(supportList);
                 if (!tempList.Contains(employeeId) && !employeeId.Equals(dailyConsumption.employeeId))
@@ -81,7 +81,7 @@ namespace SalonManager.Views
                         {
                             employeeMonth[day].ProductCommission += goodsBonus;
                         }
-                        leftCost -= goodsBonus;
+                        leftCost -= (goodsBonus+goodsPrice);
                     }
 
                     string[] serviceList = dailyConsumption.serviceId.Split(',');
@@ -115,16 +115,18 @@ namespace SalonManager.Views
                         {
                             employeeMonth[day].NotSpecify += 1;
                         }
-                        /*if (leftCost > 0)
-                        {
-                            employeeyear[month].Performance += leftCost ;
-                        }*/
+                        
                         employeeMonth[day].Performance += dailyConsumption.Cost;
-
+                        employeeMonth[day].ActualPerformance += leftCost;
                     }
                 }
             }
-
+            System.Console.WriteLine("Month" + employeeMonth[5].ActualPerformance);
+            
+            for (int cn = 0; cn < employeeMonth.Count; cn++)
+            {
+                employeeMonth[cn].ActualPerformance = (int)(employeeMonth[cn].ActualPerformance * 0.9 * employee.Commission / 100) + employeeMonth[cn].ServiceCommission + employeeMonth[cn].ProductCommission;
+            }
             ICollectionView monthlyView = CollectionViewSource.GetDefaultView(employeeMonth);
 
             this.MonthlyServicesGrid.ItemsSource = monthlyView;
@@ -178,7 +180,7 @@ namespace SalonManager.Views
                     {
                         employeeyear[month].ProductCommission += goodsBonus;
                     }
-                    leftCost -= goodsBonus;
+                    leftCost -= (goodsBonus + goodsPrice);
                 }
 
                 string[] serviceList = dailyConsumption.serviceId.Split(',');
@@ -212,17 +214,13 @@ namespace SalonManager.Views
                     {
                         employeeyear[month].NotSpecify += 1;
                     }
-                    /*if (leftCost > 0)
-                    {
-                        employeeyear[month].Performance += leftCost ;
-                    }*/
                     employeeyear[month].Performance += dailyConsumption.Cost;
-
+                    employeeyear[month].ActualPerformance += leftCost;
                 }
             }
             for (int cn = 0; cn < employeeyear.Count; cn++)
             {
-                employeeyear[cn].Performance = employeeyear[cn].Performance;
+                employeeyear[cn].ActualPerformance = (int)(employeeyear[cn].ActualPerformance * 0.9 * employee.Commission / 100) + employeeyear[cn].ServiceCommission + employeeyear[cn].ProductCommission;
             }
 
             ICollectionView yearlyView = CollectionViewSource.GetDefaultView(employeeyear);
@@ -237,7 +235,6 @@ namespace SalonManager.Views
             Dictionary<string, ServiceResult> serviceResultDic = new Dictionary<string, ServiceResult>();
             List<ServiceResult> serviceResultList = new List<ServiceResult>();
             double totalBonus = 0;
-            int DesignerBonus = 0;
             string employeeId = data.DBID.ToString();
             SetYearlyResultView(data, date, list);
             SetMonthlyResultView(data, date, list);
@@ -307,6 +304,14 @@ namespace SalonManager.Views
                             Int32.TryParse(strs[2], out servicePrice);
                             Int32.TryParse(strs[3], out servicBonus);
                         }
+                        if (employeeId.Equals(dailyConsumption.employeeId))
+                        {
+                            if (serviceResultDic.ContainsKey(serviceId))
+                            {
+                                serviceResultDic[serviceId].DesignerMonthly += 1;
+                                serviceResultDic[serviceId].DesignerYearly += 1;
+                            }
+                        }
                         if (providerId.Equals(employeeId))
                         {
                             
@@ -322,14 +327,15 @@ namespace SalonManager.Views
                     {
                         if (dailyConsumption.IsSpecify && serviceResultDic.ContainsKey("specify"))
                         {
-                            serviceResultDic["specify"].MonthlyNumber += 1;
-                            serviceResultDic["specify"].YearlyNumber += 1;
+                            serviceResultDic["specify"].DesignerMonthly += 1;
+                            serviceResultDic["specify"].DesignerYearly += 1;
                         }
                         else if (!dailyConsumption.IsSpecify && serviceResultDic.ContainsKey("notspecify"))
                         {
-                            serviceResultDic["notspecify"].MonthlyNumber += 1;
-                            serviceResultDic["notspecify"].YearlyNumber += 1;
+                            serviceResultDic["notspecify"].DesignerMonthly += 1;
+                            serviceResultDic["notspecify"].DesignerYearly += 1;
                         }
+                        
                         if(leftCost > 0)
                             bonus += leftCost * data.Commission / 100 * 0.9;
                     }
@@ -349,6 +355,13 @@ namespace SalonManager.Views
                             serviceId = strs[0];
                             providerId = strs[1];
                         }
+                        if (employeeId.Equals(dailyConsumption.employeeId))
+                        {
+                            if (serviceResultDic.ContainsKey(serviceId))
+                            {
+                                serviceResultDic[serviceId].DesignerYearly += 1;
+                            }
+                        }
                         if (providerId.Equals(employeeId))
                         {
                             if (serviceResultDic.ContainsKey(serviceId))
@@ -357,15 +370,15 @@ namespace SalonManager.Views
                             }
                         }
                     }
-                    if (employeeId.Equals(dailyConsumption.employeeId))
+                    if (employeeId.Equals(dailyConsumption.employeeId))//設計師
                     {
                         if (dailyConsumption.IsSpecify && serviceResultDic.ContainsKey("specify"))
                         {
-                            serviceResultDic["specify"].YearlyNumber += 1;
+                            serviceResultDic["specify"].DesignerYearly += 1;
                         }
                         else if (!dailyConsumption.IsSpecify && serviceResultDic.ContainsKey("notspecify"))
                         {
-                            serviceResultDic["notspecify"].YearlyNumber += 1;
+                            serviceResultDic["notspecify"].DesignerYearly += 1;
                         }
                     }
                 }
