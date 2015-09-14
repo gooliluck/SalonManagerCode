@@ -21,7 +21,7 @@
                 <Image Source="/SalonManager;component/Image/01圖.png" RenderTransformOrigin="1,1" Width="100" Height="100" />
                 <Image Source="/SalonManager;component/Image/02英字.png" RenderTransformOrigin="1,1" Width="200" Height="100" />
                 <Image Source="/SalonManager;component/Image/03中字.png" RenderTransformOrigin="1,1" Width="500" Height="100" />
-                <StackPanel Orientation="Vertical" Margin="400,20">
+                <StackPanel Margin="400,0,200,0" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <DatePicker SelectedDate="{Binding ChooseDate}" Width="137" HorizontalAlignment="Left" FontSize="18"></DatePicker>
                     <Border HorizontalAlignment="Left" Margin="0 5" BorderBrush="Black" BorderThickness="2" Width="375">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">

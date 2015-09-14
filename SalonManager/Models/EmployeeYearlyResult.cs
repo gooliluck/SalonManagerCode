@@ -7,6 +7,17 @@ namespace SalonManager.Models
 {
     class EmployeeYearlyResult
     {
+        public string DateString
+        {
+            get 
+            {
+                if (month < 10)
+                {
+                    return Year + "/0" + Month;
+                }else
+                    return Year + "/" + Month; 
+            }
+        }
         private int year = 0;
         public int Year
         {

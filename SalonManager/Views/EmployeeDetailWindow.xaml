@@ -70,21 +70,27 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <DataGrid Name="MonthlyServicesGrid" Width="850" Height="400" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ServiceName}"
+                                <DataGridTextColumn Binding="{Binding DateString}"
                                         IsReadOnly="True"
-                                        Header="服務項目" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding MonthlyNumber}"
+                                        Header="日期" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding Specify}"
                                         IsReadOnly="True"
-                                        Header="月服務客數" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding MonthlyNumber}"
+                                        Header="指定" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding NotSpecify}"
                                         IsReadOnly="True"
-                                        Header="月設計師客數" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding YearlyNumber}"
+                                        Header="非指定" Foreground="Blue" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding ServiceCommission}"
                                         IsReadOnly="True"
-                                        Header="年服務客數" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding YearlyNumber}"
+                                        Header="服務抽成" Foreground="Blue" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding ProductCommission}"
                                         IsReadOnly="True"
-                                        Header="年設計師客數" Foreground="Blue" Width="1*"/>
+                                        Header="產品抽成" Foreground="Blue" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding Performance}"
+                                        IsReadOnly="True"
+                                        Header="虛業績" Foreground="Blue" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding ActualPerformance}"
+                                        IsReadOnly="True"
+                                        Header="實業績" Foreground="Blue" Width="1*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Button Content="列印" Margin="10" HorizontalAlignment="Center"  Name="MontylyPrintServicesButton" Foreground="White" Background="Lime" Click="PrintServicesButton_Click" FontSize="18" Height="Auto"/>
@@ -94,22 +100,25 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <DataGrid Name="YearlyServicesGrid" Width="850" Height="400" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" IsTextSearchEnabled="False" IsManipulationEnabled="False" AllowDrop="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ServiceName}"
+                                <DataGridTextColumn Binding="{Binding DateString}"
+                                        IsReadOnly="True"
+                                        Header="日期" Width="1*"/>
+                                <DataGridTextColumn Binding="{Binding Specify}"
                                         IsReadOnly="True"
                                         Header="指定" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding MonthlyNumber}"
+                                <DataGridTextColumn Binding="{Binding NotSpecify}"
                                         IsReadOnly="True"
                                         Header="非指定" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding MonthlyNumber}"
+                                <DataGridTextColumn Binding="{Binding ServiceCommission}"
                                         IsReadOnly="True"
                                         Header="服務抽成" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding YearlyNumber}"
+                                <DataGridTextColumn Binding="{Binding ProductCommission}"
                                         IsReadOnly="True"
                                         Header="產品抽成" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding YearlyNumber}"
+                                <DataGridTextColumn Binding="{Binding Performance}"
                                         IsReadOnly="True"
                                         Header="虛業績" Foreground="Blue" Width="1*"/>
-                                <DataGridTextColumn Binding="{Binding YearlyNumber}"
+                                <DataGridTextColumn Binding="{Binding ActualPerformance}"
                                         IsReadOnly="True"
                                         Header="實業績" Foreground="Blue" Width="1*"/>
                             </DataGrid.Columns>

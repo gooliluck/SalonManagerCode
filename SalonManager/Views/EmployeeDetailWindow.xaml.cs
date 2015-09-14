@@ -29,15 +29,218 @@ namespace SalonManager.Views
             InitializeComponent();
             
         }
+        private void SetMonthlyResultView(Employee employee, DateTime date, List<DailyConsumption> list)
+        {
+            int days = DateTime.DaysInMonth(date.Year, date.Month);
+            string employeeId = employee.DBID.ToString();
+            List<EmployeeMonthlyResult> employeeMonth = new List<EmployeeMonthlyResult>();
+            for (int month = 0; month < days; month++)
+            {
+                EmployeeMonthlyResult monthresult = new EmployeeMonthlyResult();
+                monthresult.Year = date.Year;
+                monthresult.Month = date.Month;
+                monthresult.Day = month+1;
+                employeeMonth.Add(monthresult);
+            }
+            foreach (DailyConsumption dailyConsumption in list)
+            {
+                int bonus = 0;
+                int day = 0;
+                int leftCost = 0;
+                string[] supportList = dailyConsumption.supporterId.Split(',');
+                List<string> tempList = new List<string>(supportList);
+                if (!tempList.Contains(employeeId) && !employeeId.Equals(dailyConsumption.employeeId))
+                {
+                    continue;
+                }
+                if (dailyConsumption.month.Equals(date.Month))
+                {
+                    for (int cn = 0; cn < employeeMonth.Count; cn++)
+                    {
+                        if (employeeMonth[cn].Day == dailyConsumption.day)
+                        {
+                            day = cn;
+                        }
+                    }
+                    string[] goodsList = dailyConsumption.consumerGoodsId.Split(',');
+                    foreach (string tempStr in goodsList)
+                    {
+                        string goodsId = tempStr;
+                        string providerId = "";
+                        int goodsPrice = 0;
+                        int goodsBonus = 0;
+                        string[] strs = tempStr.Split('-');
+                        if (strs.Length >= 4)
+                        {
+                            goodsId = strs[0];
+                            providerId = strs[1];
+                            Int32.TryParse(strs[2], out goodsPrice);
+                            Int32.TryParse(strs[3], out goodsBonus);
+                        }
+                        if (providerId.Equals(employeeId))
+                        {
+                            employeeMonth[day].ProductCommission += goodsBonus;
+                        }
+                        leftCost -= goodsBonus;
+                    }
+
+                    string[] serviceList = dailyConsumption.serviceId.Split(',');
+                    foreach (string tempStr in serviceList)
+                    {
+                        string serviceId = tempStr;
+                        string providerId = "";
+                        int servicePrice = 0;
+                        int servicBonus = 0;
+                        string[] strs = tempStr.Split('-');
+                        if (strs.Length >= 4)
+                        {
+                            serviceId = strs[0];
+                            providerId = strs[1];
+                            Int32.TryParse(strs[2], out servicePrice);
+                            Int32.TryParse(strs[3], out servicBonus);
+                        }
+                        if (providerId.Equals(employeeId))
+                        {
+                            employeeMonth[day].ServiceCommission += servicBonus;
+                        }
+                        leftCost -= servicBonus;
+                    }
+                    if (employeeId.Equals(dailyConsumption.employeeId))
+                    {
+                        if (dailyConsumption.IsSpecify)
+                        {
+                            employeeMonth[day].Specify += 1;
+                        }
+                        else if (!dailyConsumption.IsSpecify)
+                        {
+                            employeeMonth[day].NotSpecify += 1;
+                        }
+                        /*if (leftCost > 0)
+                        {
+                            employeeyear[month].Performance += leftCost ;
+                        }*/
+                        employeeMonth[day].Performance += dailyConsumption.Cost;
+
+                    }
+                }
+            }
+
+            ICollectionView monthlyView = CollectionViewSource.GetDefaultView(employeeMonth);
+
+            this.MonthlyServicesGrid.ItemsSource = monthlyView;
+        }
+        private void SetYearlyResultView(Employee employee, DateTime date, List<DailyConsumption> list)
+        {
+            string employeeId = employee.DBID.ToString();
+            List<EmployeeYearlyResult> employeeyear = new List<EmployeeYearlyResult>();
+            for (int month = 1; month < 13; month++)
+            {
+                EmployeeYearlyResult monthresult = new EmployeeYearlyResult();
+                monthresult.Year = date.Year;
+                monthresult.Month = month;
+                employeeyear.Add(monthresult);
+            }
+            foreach (DailyConsumption dailyConsumption in list)
+            {
+                int leftCost = dailyConsumption.Cost;
+                int AllIncome = 0;
+                int month = 0;
+                string[] supportList = dailyConsumption.supporterId.Split(',');
+                List<string> tempList = new List<string>(supportList);
+                if (!tempList.Contains(employeeId) && !employeeId.Equals(dailyConsumption.employeeId))
+                {
+                    continue;
+                }
+                
+                for(int cn = 0;cn < employeeyear.Count ; cn++)
+                {
+                    if (employeeyear[cn].Month == dailyConsumption.month)
+                    {
+                        month = cn;
+                    }
+                }
+                string[] goodsList = dailyConsumption.consumerGoodsId.Split(',');
+                foreach (string tempStr in goodsList)
+                {
+                    string goodsId = tempStr;
+                    string providerId = "";
+                    int goodsPrice = 0;
+                    int goodsBonus = 0;
+                    string[] strs = tempStr.Split('-');
+                    if (strs.Length >= 4)
+                    {
+                        goodsId = strs[0];
+                        providerId = strs[1];
+                        Int32.TryParse(strs[2], out goodsPrice);
+                        Int32.TryParse(strs[3], out goodsBonus);
+                    }
+                    if (providerId.Equals(employeeId))
+                    {
+                        employeeyear[month].ProductCommission += goodsBonus;
+                    }
+                    leftCost -= goodsBonus;
+                }
+
+                string[] serviceList = dailyConsumption.serviceId.Split(',');
+                foreach (string tempStr in serviceList)
+                {
+                    string serviceId = tempStr;
+                    string providerId = "";
+                    int servicePrice = 0;
+                    int servicBonus = 0;
+                    string[] strs = tempStr.Split('-');
+                    if (strs.Length >= 4)
+                    {
+                        serviceId = strs[0];
+                        providerId = strs[1];
+                        Int32.TryParse(strs[2], out servicePrice);
+                        Int32.TryParse(strs[3], out servicBonus);
+                    }
+                    if (providerId.Equals(employeeId))
+                    {
+                        employeeyear[month].ServiceCommission += servicBonus;
+                    }
+                    leftCost -= servicBonus;
+                }
+                if (employeeId.Equals(dailyConsumption.employeeId))
+                {
+                    if (dailyConsumption.IsSpecify)
+                    {
+                        employeeyear[month].Specify += 1;
+                    }
+                    else if (!dailyConsumption.IsSpecify)
+                    {
+                        employeeyear[month].NotSpecify += 1;
+                    }
+                    /*if (leftCost > 0)
+                    {
+                        employeeyear[month].Performance += leftCost ;
+                    }*/
+                    employeeyear[month].Performance += dailyConsumption.Cost;
+
+                }
+            }
+            for (int cn = 0; cn < employeeyear.Count; cn++)
+            {
+                employeeyear[cn].Performance = employeeyear[cn].Performance;
+            }
+
+            ICollectionView yearlyView = CollectionViewSource.GetDefaultView(employeeyear);
+            this.YearlyServicesGrid.ItemsSource = yearlyView;
+
+
+        }
         public void setData(Employee data,List<DailyConsumption> list)
         {
             DateTime date = MainWindowViewModel.ins().ChooseDate;
             List<DailyConsumption> monthlyList = new List<DailyConsumption>();
             Dictionary<string, ServiceResult> serviceResultDic = new Dictionary<string, ServiceResult>();
             List<ServiceResult> serviceResultList = new List<ServiceResult>();
-            int totalBonus = 0;
+            double totalBonus = 0;
+            int DesignerBonus = 0;
             string employeeId = data.DBID.ToString();
-           
+            SetYearlyResultView(data, date, list);
+            SetMonthlyResultView(data, date, list);
             ServiceResult specifyService = new ServiceResult();
             specifyService.ServiceId = "specify";
             specifyService.ServiceName = "指定設計";
@@ -57,7 +260,7 @@ namespace SalonManager.Views
 
             foreach (DailyConsumption dailyConsumption in list)
             {
-                int bonus = 0;
+                double bonus = 0.0f;
                 string[] supportList = dailyConsumption.supporterId.Split(',');
                 List<string> tempList = new List<string>(supportList);
                 if (!tempList.Contains(employeeId) && !employeeId.Equals(dailyConsumption.employeeId))
@@ -128,10 +331,10 @@ namespace SalonManager.Views
                             serviceResultDic["notspecify"].YearlyNumber += 1;
                         }
                         if(leftCost > 0)
-                            bonus += leftCost * data.Commission / 100;
+                            bonus += leftCost * data.Commission / 100 * 0.9;
                     }
                     totalBonus += bonus;
-                    dailyConsumption.EmployeeBonus = bonus;
+                    dailyConsumption.EmployeeBonus = (int)bonus;
                     monthlyList.Add(dailyConsumption);
                 }
                 else {
@@ -178,21 +381,14 @@ namespace SalonManager.Views
             this.ResultsGrid.ItemsSource = monthlyView;
             this.ServicesGrid.ItemsSource = resultsView;
             this.EmployeeName.Text = data.Name;
-            this.CaculateText.Text = data.BasicSalary + " + " + totalBonus + " = ";
-            this.TotalSalaryText.Text = (data.BasicSalary + totalBonus).ToString();
+            this.CaculateText.Text = data.BasicSalary + " + " + (int)totalBonus + " = ";
+            this.TotalSalaryText.Text = (data.BasicSalary + (int)totalBonus).ToString();
 
-            SetSalaryView(data, totalBonus);
+            SetSalaryView(data, (int)totalBonus);
             ICollectionView Salarylistview = CollectionViewSource.GetDefaultView(salaryview);
             this.SalaryListGrid.ItemsSource = Salarylistview;
         }
-        private void SetMonthlyResultView(Employee employee, DateTime date, List<DailyConsumption> list)
-        {
-
-        }
-        private void SetYearlyResultView(Employee employee, DateTime date, List<DailyConsumption> list)
-        {
-
-        }
+        
         private void SetSalaryView(Employee data,int totalBonus)
         {
             salaryview = new List<EmployeeSalaryListResult>();
