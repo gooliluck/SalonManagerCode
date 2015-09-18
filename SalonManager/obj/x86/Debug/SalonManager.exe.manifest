@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SalonManager.exe" size="453632">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SalonManager.exe" size="454144">
       <assemblyIdentity name="SalonManager" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>jEGtZBMtgMR7dw0z3isNLassRoc=</dsig:DigestValue>
+        <dsig:DigestValue>ON8flBnL4PlfTzJiKb1OGTOXaBY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

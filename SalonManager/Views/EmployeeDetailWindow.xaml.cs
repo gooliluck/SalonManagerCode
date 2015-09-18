@@ -81,7 +81,7 @@ namespace SalonManager.Views
                         {
                             employeeMonth[day].ProductCommission += goodsBonus;
                         }
-                        leftCost -= (goodsBonus+goodsPrice);
+                        leftCost -= goodsPrice;
                     }
 
                     string[] serviceList = dailyConsumption.serviceId.Split(',');
@@ -121,7 +121,10 @@ namespace SalonManager.Views
                     }
                 }
             }
-            System.Console.WriteLine("Month" + employeeMonth[5].ActualPerformance);
+            System.Console.WriteLine("day " + employeeMonth[1].Day);
+            System.Console.WriteLine("actual performance " + employeeMonth[1].ActualPerformance);
+            System.Console.WriteLine("product " + employeeMonth[1].ProductCommission);
+            System.Console.WriteLine("service " + employeeMonth[1].ServiceCommission);
             
             for (int cn = 0; cn < employeeMonth.Count; cn++)
             {
