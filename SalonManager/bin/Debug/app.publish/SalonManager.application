@@ -8,7 +8,7 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="SalonManager.exe.manifest" size="6027">
+    <dependentAssembly dependencyType="install" codebase="Application Files\SalonManager_1_0_0_7\SalonManager.exe.manifest" size="6027">
       <assemblyIdentity name="SalonManager.exe" version="1.0.0.7" publicKeyToken="0000000000000000" language="zh-TW" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>

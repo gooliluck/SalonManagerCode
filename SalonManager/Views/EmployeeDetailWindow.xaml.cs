@@ -125,11 +125,13 @@ namespace SalonManager.Views
             System.Console.WriteLine("actual performance " + employeeMonth[1].ActualPerformance);
             System.Console.WriteLine("product " + employeeMonth[1].ProductCommission);
             System.Console.WriteLine("service " + employeeMonth[1].ServiceCommission);
-            
+            int total = 0;
             for (int cn = 0; cn < employeeMonth.Count; cn++)
             {
                 employeeMonth[cn].ActualPerformance = (int)(employeeMonth[cn].ActualPerformance * 0.9 * employee.Commission / 100) + employeeMonth[cn].ServiceCommission + employeeMonth[cn].ProductCommission;
+                total += employeeMonth[cn].ActualPerformance;
             }
+            System.Console.WriteLine("total is "+total);
             ICollectionView monthlyView = CollectionViewSource.GetDefaultView(employeeMonth);
 
             this.MonthlyServicesGrid.ItemsSource = monthlyView;
@@ -238,6 +240,7 @@ namespace SalonManager.Views
             Dictionary<string, ServiceResult> serviceResultDic = new Dictionary<string, ServiceResult>();
             List<ServiceResult> serviceResultList = new List<ServiceResult>();
             double totalBonus = 0;
+            double totalb = 0;
             string employeeId = data.DBID.ToString();
             SetYearlyResultView(data, date, list);
             SetMonthlyResultView(data, date, list);
@@ -343,6 +346,8 @@ namespace SalonManager.Views
                             bonus += leftCost * data.Commission / 100 * 0.9;
                     }
                     totalBonus += bonus;
+                    totalb += bonus;
+                    
                     dailyConsumption.EmployeeBonus = (int)bonus;
                     monthlyList.Add(dailyConsumption);
                 }
